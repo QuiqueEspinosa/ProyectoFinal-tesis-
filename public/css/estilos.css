@@ -1,0 +1,245 @@
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+}
+
+/* Estilos para la barra de navegación */
+.navbar {
+    width: 100%;
+    background-color: #333;
+    color: white;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.logo img {
+    height: 40px;
+}
+
+/* Estilos generales para la lista de navegación */
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 1rem; /* Espaciado uniforme entre elementos */
+    list-style: none; /* Quitar puntos de la lista */
+    margin: 0;
+    padding: 0;
+}
+
+/* Estilos para los enlaces de la lista */
+.nav-links li {
+    margin: 0;
+    padding: 0;
+}
+
+.nav-links li a {
+    color: #fff; /* Color de texto blanco */
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    transition: background-color 0.3s ease; /* Transición suave para el hover */
+}
+
+.nav-links li a:hover {
+    background-color: #007bff; /* Cambiar color de fondo al hacer hover */
+    border-radius: 5px; /* Bordes redondeados para el hover */
+}
+
+/* Estilos para los botones */
+.nav-links .btn {
+    margin-left: 1rem; /* Espaciado entre el enlace y el botón */
+    padding: 0.5rem 1rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.nav-links .btn:hover {
+    background-color: #fff;
+    color: #007bff;
+}
+#countdown-container {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #ffffff;
+}
+
+#countdown {
+    background: #ffffff05; /* Fondo del contador */
+    color: #ffffff;
+    padding: 0.5rem 1rem;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+#countdown.pulse {
+    animation: pulse 1.5s infinite;
+}
+@keyframes pulse {
+    0% {
+        transform: scale(1);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.7;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+.btn-outline-light {
+    margin: 0 0.5rem;
+}
+/* Estilos para la lista en pantallas pequeñas */
+@media (max-width: 768px) {
+    .nav-links {
+        flex-direction: column; /* Colocar elementos en columna */
+        gap: 0.5rem; /* Reducir espaciado en pantallas pequeñas */
+    }
+
+    .nav-links li a, .nav-links .btn {
+        width: 100%; /* Botones y enlaces toman todo el ancho */
+        text-align: center;
+    }
+}
+
+.hamburger {
+    display: none;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.hamburger span {
+    height: 3px;
+    width: 25px;
+    background-color: white;
+    margin: 4px 0;
+    transition: 0.3s;
+}
+
+/* Estilos para las mesas */
+.main-table {
+    width: 150px;
+    height: 150px;
+    padding: 20px;
+    background-color: #f1c205f3;
+    color: white;
+    border-radius: 50%;
+    position: relative;
+    margin-bottom: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.tables-container {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.list {
+    width: 45%;
+    min-height: 500px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    padding: 10px;
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    background-color: #f7f7f7;
+}
+
+.item {
+    width: 120px;
+    height: 120px;
+    background-color: #e83f8b;
+    color: white;
+    border-radius: 50%;
+    position: relative;
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    cursor: grab;
+}
+
+/* Estilos de drag an drop */
+.list .item.seleccionado{
+    transform: scale(1.02) rotate(-1deg);
+    box-shadow: 0px 0px 20px rgba(149, 153, 159, .16);
+    }
+    .list .item.drag{
+        opacity:0;
+    }
+
+    /* Estilos de drag an drop */
+
+.item::before,
+.item::after {
+    content: '';
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background-color: #fff;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.item::before {
+    top: -20px;
+    left: calc(50% - 15px);
+}
+
+.item::after {
+    bottom: -20px;
+    left: calc(50% - 15px);
+}
+
+.item .chair-left,
+.item .chair-right {
+    position: absolute;
+    width: 30px;
+    height: 30px;
+    background-color: #fff;
+    border-radius: 50%;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.item .chair-left {
+    left: -20px;
+    top: calc(50% - 15px);
+}
+
+.item .chair-right {
+    right: -20px;
+    top: calc(50% - 15px);
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .nav-links {
+        display: none;
+        flex-direction: column;
+    }
+
+    .hamburger {
+        display: flex;
+    }
+
+    .navbar.active .nav-links {
+        display: flex;
+    }
+}
+
+
