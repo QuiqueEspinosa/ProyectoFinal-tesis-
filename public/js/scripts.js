@@ -1,49 +1,53 @@
-// scripts.js
+document.addEventListener('DOMContentLoaded', () => {
+    const salon = document.getElementById('salon1');
+    const mesas = document.querySelectorAll('.mesa');
 
-document.addEventListener('DOMContentLoaded', function() {
-    const leftList = document.getElementById('leftList');
-    const rightList = document.getElementById('rightList');
+    mesas.forEach(mesa => {
+        mesa.draggable = true;
 
-    // Initialize sortable for left list
-    new Sortable(leftList, {
-        group: 'shared',
-        animation: 150,
-        chosenClass:"seleccionado",
-        // ghostClass:"fantasma"
-        dragClass:"drag",
-        onEnd: function(evt) {
-            updatePositions();
-        }
+        mesa.addEventListener('dragstart', (e) => {
+            e.dataTransfer.setData('text/plain', e.target.id);
+            setTimeout(() => {
+                e.target.classList.add('dragging');
+            }, 0);
+        });
+
+        mesa.addEventListener('dragend', (e) => {
+            e.target.classList.remove('dragging');
+            savePositions(); // Llamamos a la función para guardar las posiciones
+        });
+
+        salon.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            const draggingElement = document.querySelector('.dragging');
+            if (draggingElement) {
+                const salonRect = salon.getBoundingClientRect();
+                const x = e.clientX - salonRect.left - draggingElement.offsetWidth / 2;
+                const y = e.clientY - salonRect.top - draggingElement.offsetHeight / 2;
+                draggingElement.style.left = `${Math.min(Math.max(0, x), salonRect.width - draggingElement.offsetWidth)}px`;
+                draggingElement.style.top = `${Math.min(Math.max(0, y), salonRect.height - draggingElement.offsetHeight)}px`;
+            }
+        });
+
+        mesa.addEventListener('mousedown', () => {
+            mesa.classList.add('highlight');
+        });
+
+        mesa.addEventListener('mouseup', () => {
+            mesa.classList.remove('highlight');
+        });
     });
 
-    // Initialize sortable for right list
-    new Sortable(rightList, {
-        group: 'shared',
-        animation: 150,
-        chosenClass:"seleccionado",
-        // ghostClass:"fantasma"
-        dragClass:"drag",
-        onEnd: function(evt) {
-            updatePositions();
-        }
-    });
+    function savePositions() {
+        const positions = [];
+        document.querySelectorAll('.mesa').forEach(mesa => {
+            const id = mesa.dataset.id;
+            const x = parseInt(mesa.style.left);
+            const y = parseInt(mesa.style.top);
+            positions.push({ id, x, y });
+        });
 
-    function updatePositions() {
-        const leftItems = Array.from(leftList.children).map((item, index) => ({
-            id: item.getAttribute('data-id'),
-            posicion: index + 1,
-            lista: 'izquierda'
-        }));
-
-        const rightItems = Array.from(rightList.children).map((item, index) => ({
-            id: item.getAttribute('data-id'),
-            posicion: index + 1,
-            lista: 'derecha'
-        }));
-
-        const positions = [...leftItems, ...rightItems];
-
-        fetch('/update-positions', {  // Cambia la URL si es necesario
+        fetch('/update-positions', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -53,10 +57,10 @@ document.addEventListener('DOMContentLoaded', function() {
         })
         .then(response => response.json())
         .then(data => {
-            if (data.message) {
-                console.log(data.message);
-            }
+            console.log('Posiciones guardadas:', data.message);
         })
-        .catch(error => console.error('Error:', error));
+        .catch(error => {
+            console.error('Error al guardar las posiciones:', error);
+        });
     }
 });

@@ -5,23 +5,68 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Config;
 use App\Models\Mesa;
+
 class AdminController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        $config = Config::first(); // Obtener la configuración
+        $config = Config::first();
 
-        $fechaHoraEvento = null;
-        if ($config && $config->fecha_evento && $config->horario) {
-            $fechaHoraEvento = $config->fecha_evento . ' ' . $config->horario;
+        $fechaHoraEvento = $config && $config->fecha_evento && $config->horario
+            ? $config->fecha_evento . ' ' . $config->horario
+            : null;
+
+        $mesaPrincipal = Mesa::where('tipo_mesa', 'Principal')->first();
+        if (!$mesaPrincipal) {
+            $mesaPrincipal = Mesa::create([
+                'titulo' => 'Mesa Principal',
+                'tipo_mesa' => 'Principal',
+                'posicion' => 1,
+            ]);
         }
 
-        $mesas = Mesa::orderBy('posicion')->get();
+        $mesas = Mesa::where('tipo_mesa', 'Común')->orderBy('posicion')->get();
 
-        return view('admin.index', compact('config', 'mesas', 'fechaHoraEvento'));
+        return view('admin.index', compact('config', 'mesas', 'mesaPrincipal', 'fechaHoraEvento'));
+    }
+
+
+    // app/Http/Controllers/AdminController.php
+
+    public function addTable(Request $request)
+    {
+        $request->validate([
+            'x' => 'nullable|integer',
+            'y' => 'nullable|integer',
+        ]);
+    
+        $ultimoNumero = Mesa::where('tipo_mesa', 'Común')->max('numero_mesa') ?? 0;
+        $numeroMesa = $ultimoNumero + 1;
+    
+        $mesa = Mesa::create([
+            'numero_mesa' => $numeroMesa,
+            'titulo' => 'Mesa ' . $numeroMesa,
+            'tipo_mesa' => 'Común',
+            'x' => $request->input('x', 0),
+            'y' => $request->input('y', 0),
+            'posicion' => $numeroMesa,
+        ]);
+    
+        $mesas = Mesa::where('tipo_mesa', 'Común')->orderBy('posicion')->get();
+    
+        return response()->json(['success' => true, 'mesas' => $mesas], 201);
     }
     
-     }
+    public function removeLastTable()
+    {
+        $mesa = Mesa::where('tipo_mesa', 'Común')->orderBy('posicion', 'desc')->first();
+
+        if ($mesa) {
+            $mesa->delete();
+            return response()->json(['success' => true], 200);
+        }
+
+        return response()->json(['success' => false, 'message' => 'No hay mesas para eliminar'], 404);
+    }
+
+}

@@ -1,59 +1,48 @@
-body {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    font-family: Arial, sans-serif;
-    background-color: #f0f0f0;
-    margin: 0;
-}
 
 /* Estilos para la barra de navegación */
 .navbar {
     width: 100%;
-    background-color: #333;
+    background-color: #000000b5;
     color: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding: 10px 20px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    position: relative;
 }
-
 .logo img {
     height: 40px;
 }
 
-/* Estilos generales para la lista de navegación */
 .nav-links {
     display: flex;
     align-items: center;
-    gap: 1rem; /* Espaciado uniforme entre elementos */
-    list-style: none; /* Quitar puntos de la lista */
+    gap: 1rem;
+    list-style: none;
     margin: 0;
     padding: 0;
 }
 
-/* Estilos para los enlaces de la lista */
 .nav-links li {
     margin: 0;
     padding: 0;
 }
 
 .nav-links li a {
-    color: #fff; /* Color de texto blanco */
+    color: #fff;
     text-decoration: none;
     padding: 0.5rem 1rem;
-    transition: background-color 0.3s ease; /* Transición suave para el hover */
+    transition: background-color 0.3s ease;
 }
 
 .nav-links li a:hover {
-    background-color: #007bff; /* Cambiar color de fondo al hacer hover */
-    border-radius: 5px; /* Bordes redondeados para el hover */
+    background-color: #007bff;
+    border-radius: 5px;
 }
 
-/* Estilos para los botones */
 .nav-links .btn {
-    margin-left: 1rem; /* Espaciado entre el enlace y el botón */
+    margin-left: 1rem;
     padding: 0.5rem 1rem;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
@@ -62,24 +51,30 @@ body {
     background-color: #fff;
     color: #007bff;
 }
-#countdown-container {
-    font-size: 1.5rem;
+
+/* Estilos para centrar el countdown */
+.countdown-container {
+    flex-grow: 1;
+    text-align: center;
+    font-size: 1.25rem;
     font-weight: bold;
-    color: #ffffff;
+  
 }
 
 #countdown {
-    background: #ffffff05; /* Fondo del contador */
+    background: #ffffff05;
     color: #ffffff;
     padding: 0.5rem 1rem;
     border-radius: 5px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease;
+    background-color: #ecd611;
 }
 
 #countdown.pulse {
     animation: pulse 1.5s infinite;
 }
+
 @keyframes pulse {
     0% {
         transform: scale(1);
@@ -94,21 +89,11 @@ body {
         opacity: 1;
     }
 }
+
 .btn-outline-light {
     margin: 0 0.5rem;
 }
-/* Estilos para la lista en pantallas pequeñas */
-@media (max-width: 768px) {
-    .nav-links {
-        flex-direction: column; /* Colocar elementos en columna */
-        gap: 0.5rem; /* Reducir espaciado en pantallas pequeñas */
-    }
 
-    .nav-links li a, .nav-links .btn {
-        width: 100%; /* Botones y enlaces toman todo el ancho */
-        text-align: center;
-    }
-}
 
 .hamburger {
     display: none;
@@ -124,122 +109,75 @@ body {
     transition: 0.3s;
 }
 
-/* Estilos para las mesas */
-.main-table {
-    width: 150px;
-    height: 150px;
-    padding: 20px;
-    background-color: #f1c205f3;
-    color: white;
-    border-radius: 50%;
+#salon1 {
     position: relative;
-    margin-bottom: 40px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    width: 87vw;
+    height: 91vh;
+    border: 1px solid #ccc;
+    overflow: hidden;
+    margin: 0 auto;
 }
 
-.tables-container {
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
-    gap: 20px;
+.mesa {
+    width: 7vw; /* Ajuste según el viewport */
+    height: 7vw; /* Mantén la proporción */
+    max-width: 70px; /* Tamaño máximo para evitar que se agranden mucho */
+    max-height: 70px; /* Mantén la proporción en pantallas grandes */
+    background-color: #007bff;
+    color: white;
+    text-align: center;
+    line-height: 6vw; /* Centra el texto verticalmente */
+    border-radius: 50%;
+    cursor: move;
+    position: absolute;
+    transition: transform 0.2s ease;
+}
+
+.mesa-principal {
+    background-color: #ecd611;
+    width: 7vw;
+    height: 7vw;
+    max-width: 80px;
+    max-height: 80px;
+}
+
+.mesa.dragging {
+    opacity: 0; /* Reduce la opacidad mientras se arrastra */
+    transform: scale(1.05); /* Escala ligeramente el elemento para destacarlo */
+    z-index: 1000; /* Asegúrate de que el elemento arrastrado esté sobre los demás */
+}
+.mesa.highlight {
+    border: 2px solid #007bff; /* Agrega un borde azul cuando se selecciona */
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.5); /* Agrega una sombra para resaltar el elemento */
+    transition: box-shadow 0.3s ease; /* Transición suave para la sombra */
 }
 
 .list {
-    width: 45%;
-    min-height: 500px;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    padding: 10px;
-    border: 2px solid #ccc;
-    border-radius: 10px;
-    background-color: #f7f7f7;
+    display: none; /* Ocultar la lista antigua */
 }
 
-.item {
-    width: 120px;
-    height: 120px;
-    background-color: #e83f8b;
-    color: white;
-    border-radius: 50%;
-    position: relative;
-    margin: auto;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
-    cursor: grab;
-}
 
-/* Estilos de drag an drop */
-.list .item.seleccionado{
-    transform: scale(1.02) rotate(-1deg);
-    box-shadow: 0px 0px 20px rgba(149, 153, 159, .16);
-    }
-    .list .item.drag{
-        opacity:0;
-    }
 
-    /* Estilos de drag an drop */
-
-.item::before,
-.item::after {
-    content: '';
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    background-color: #fff;
-    border-radius: 50%;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.item::before {
-    top: -20px;
-    left: calc(50% - 15px);
-}
-
-.item::after {
-    bottom: -20px;
-    left: calc(50% - 15px);
-}
-
-.item .chair-left,
-.item .chair-right {
-    position: absolute;
-    width: 30px;
-    height: 30px;
-    background-color: #fff;
-    border-radius: 50%;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-}
-
-.item .chair-left {
-    left: -20px;
-    top: calc(50% - 15px);
-}
-
-.item .chair-right {
-    right: -20px;
-    top: calc(50% - 15px);
-}
-
-/* Responsivo */
 @media (max-width: 768px) {
-    .nav-links {
-        display: none;
-        flex-direction: column;
-    }
-
-    .hamburger {
-        display: flex;
-    }
-
-    .navbar.active .nav-links {
-        display: flex;
+    .mesa, .mesa-principal {
+        width: 10vw; /* Aumenta el tamaño en pantallas pequeñas */
+        height: 10vw;
+        line-height: 10vw;
     }
 }
 
+@media (min-width: 768px) and (max-width: 1024px) {
+    .mesa, .mesa-principal {
+        width: 8vw;
+        height: 8vw;
+        line-height: 8vw;
+    }
+}
 
+@media (min-width: 1025px) {
+    .mesa, .mesa-principal {
+        width: 6vw; /* Tamaño para pantallas más grandes */
+        height: 6vw;
+        line-height: 6vw;
+    }
+ }

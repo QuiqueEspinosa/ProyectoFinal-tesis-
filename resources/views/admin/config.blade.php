@@ -22,6 +22,13 @@
                                 value="{{ $config->fecha_evento ?? '' }}">
                         </div>
 
+                        <!-- Horario -->
+                        <div class="form-group">
+                            <label for="horario">Horario <small>(opcional)</small></label>
+                            <input type="time" class="form-control" id="horario" name="horario"
+                                value="{{ $config->horario ?? '' }}">
+                        </div>
+
                         <!-- Clase de Evento -->
                         <div class="form-group">
                             <label for="clase_evento">Clase de Evento <small>(opcional)</small></label>
@@ -29,12 +36,7 @@
                                 value="{{ $config->clase_evento ?? '' }}">
                         </div>
 
-                        <!-- Horario -->
-                        <div class="form-group">
-                            <label for="horario">Horario <small>(opcional)</small></label>
-                            <input type="time" class="form-control" id="horario" name="horario"
-                                value="{{ $config->horario ?? '' }}">
-                        </div>
+
 
                         <!-- Salón -->
                         <div class="form-group">
@@ -59,7 +61,8 @@
 
                         <!-- Cantidad Total de Invitados -->
                         <div class="form-group">
-                            <label for="cant_total_de_invitados">Cantidad Total de Invitados <small>(opcional)</small></label>
+                            <label for="cant_total_de_invitados">Cantidad Total de Invitados
+                                <small>(opcional)</small></label>
                             <input type="number" class="form-control" id="cant_total_de_invitados"
                                 name="cant_total_de_invitados" value="{{ $config->cant_total_de_invitados ?? '' }}">
                         </div>
@@ -80,7 +83,8 @@
 
                         <!-- Cantidad de Mesas Principales -->
                         <div class="form-group">
-                            <label for="cant_mesa_principal">Cantidad de Mesas Principales <small>(opcional)</small></label>
+                            <label for="cant_mesa_principal">Cantidad de Mesas Principales
+                                <small>(opcional)</small></label>
                             <input type="number" class="form-control" id="cant_mesa_principal"
                                 name="cant_mesa_principal" value="{{ $config->cant_mesa_principal ?? '' }}">
                         </div>

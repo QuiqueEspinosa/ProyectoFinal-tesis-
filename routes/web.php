@@ -16,12 +16,14 @@ use App\Http\Controllers\MesaController;
 */
 
 Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
-Route::post('/update-positions', [AdminController::class, 'updatePositions'])->name('admin.updatePositions');
+Route::post('/update-positions', [ConfigController::class, 'updatePositions'])->name('updatePositions');
 
 Route::resource('config', ConfigController::class);
 Route::post('/mesas/ordenar', [MesaController::class, 'ordenar']);
 Route::post('/update-positions', [ConfigController::class, 'updatePositions']);
-Route::get('/admin', [ConfigController::class, 'showAdminPage'])->name('admin.page');
 
 
 
+
+Route::post('/admin/add-table', [AdminController::class, 'addTable'])->name('admin.addTable');
+Route::post('/admin/remove-last-table', [AdminController::class, 'removeLastTable'])->name('admin.removeLastTable');

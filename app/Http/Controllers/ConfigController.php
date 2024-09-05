@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
@@ -7,13 +8,6 @@ use App\Models\Mesa;
 
 class ConfigController extends Controller
 {
-    public function index()
-    {
-        $config = Config::first();
-        $mesas = Mesa::orderBy('posicion')->get();
-        return view('admin.config', compact('config', 'mesas'));
-    }
-
     public function store(Request $request)
     {
         $request->validate([
@@ -28,62 +22,62 @@ class ConfigController extends Controller
             'precio_menor' => 'nullable|numeric',
             'cant_mesa_principal' => 'nullable|integer',
         ]);
-
-        // Guardar configuración
+    
         $config = Config::first() ?? new Config();
         $config->fill($request->all());
         $config->save();
-
+    
+        // Número de mesas a crear
         $nuevasMesas = $request->input('cant_mesas');
-        $currentMesas = Mesa::orderBy('numero_mesa')->get();
-
-        // Calcula cuántas mesas se deben agregar o eliminar
-        $leftMesasCount = intval($nuevasMesas / 2);
-        $rightMesasCount = $nuevasMesas - $leftMesasCount;
-
-        // Eliminar mesas que no están en la nueva cantidad
-        $toDelete = $currentMesas->filter(function ($mesa) use ($nuevasMesas) {
-            return $mesa->numero_mesa > $nuevasMesas;
-        });
-
-        foreach ($toDelete as $mesa) {
+    
+        // Crear o actualizar mesa principal
+        $mesaPrincipal = Mesa::updateOrCreate(
+            ['numero_mesa' => 0],
+            [
+                'titulo' => 'Mesa Principal',
+                'tipo_mesa' => 'Principal',
+                'posicion' => 0, // Colocamos una posición especial para la mesa principal
+                'x' => $request->input('x_mesa_principal', 0),
+                'y' => $request->input('y_mesa_principal', 0),
+            ]
+        );
+    
+        // Eliminar mesas sobrantes si el número de mesas es menor
+        $currentMesas = Mesa::where('tipo_mesa', 'Común')->orderBy('numero_mesa')->get();
+        foreach ($currentMesas->slice($nuevasMesas) as $mesa) {
             $mesa->delete();
         }
-
-        // Actualizar mesas existentes o agregar nuevas
+    
+        // Crear o actualizar mesas comunes
         for ($i = 1; $i <= $nuevasMesas; $i++) {
-            $lista = ($i <= $leftMesasCount) ? 'izquierda' : 'derecha';
-            $mesa = Mesa::updateOrCreate(
+            Mesa::updateOrCreate(
                 ['numero_mesa' => $i],
                 [
                     'titulo' => 'Mesa ' . $i,
-                    'nota' => '',
-                    'tipo_mesa' => 'General',
+                    'tipo_mesa' => 'Común',
                     'posicion' => $i,
-                    'lista' => $lista,
                 ]
             );
         }
-
+    
         return redirect()->back()->with('success', 'Configuración y mesas guardadas exitosamente');
     }
-
+    
 
     public function updatePositions(Request $request)
     {
         $positions = $request->input('positions');
-
+    
         foreach ($positions as $pos) {
             $mesa = Mesa::find($pos['id']);
             if ($mesa) {
-                $mesa->posicion = $pos['posicion'];
-                $mesa->lista = $pos['lista'];
+                $mesa->x = $pos['x'];
+                $mesa->y = $pos['y'];
                 $mesa->save();
             }
         }
-
+    
         return response()->json(['message' => 'Posiciones actualizadas correctamente'], 200);
     }
-  
     
 }

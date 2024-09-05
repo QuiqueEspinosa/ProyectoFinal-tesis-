@@ -13,15 +13,15 @@ class CreateMesasTable extends Migration
     {
         Schema::create('mesas', function (Blueprint $table) {
             $table->id();
-            $table->integer('numero_mesa')->unique();
+            $table->integer('numero_mesa')->unique()->nullable(); // La mesa principal no tendrá número.
             $table->string('titulo');
             $table->text('nota')->nullable();
-            $table->string('tipo_mesa');
-            $table->integer('posicion'); // Posición dentro de la lista
-            $table->enum('lista', ['izquierda', 'derecha']); // Lista a la que pertenece la mesa
+            $table->string('tipo_mesa'); // 'Principal' o 'Común'.
+            $table->integer('posicion'); // Posición en el orden.
+            $table->integer('x')->default(0); // Posición X.
+            $table->integer('y')->default(0); // Posición Y.
             $table->timestamps();
         });
-        
     }
 
     /**

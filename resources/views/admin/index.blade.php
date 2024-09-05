@@ -1,21 +1,13 @@
-<!DOCTYPE html>
-<html lang="es">
+@extends('layouts.base')
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Organización de Mesas en el Evento</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="{{ asset('css/estilos.css') }}">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
-</head>
+@section('title', 'Organización de Mesas en el Evento')
+
+@section('content')
 
 <body>
     <nav class="navbar">
         <div class="logo">
-            {{-- <img src="{{ asset('images/logo.png') }}" alt="Logo"> --}}
+          <img src="{{ asset('images/logo.png') }}" alt="Logo"> 
         </div>
         <ul class="nav-links">
             <li id="countdown-container" class="flex-grow-1 text-center">
@@ -41,30 +33,21 @@
         </div>
     </nav>
 
-    <div id="mainTable" class="main-table">
-        Mesa Principal
-    </div>
-
-    <div class="tables-container d-flex">
-        <div id="leftList" class="list flex-grow-1">
-            @foreach ($mesas->where('lista', 'izquierda') as $mesa)
-                <div class="item" data-id="{{ $mesa->id }}">
-                    {{ $mesa->titulo }}
-                    <div class="chair-left"></div>
-                    <div class="chair-right"></div>
-                </div>
-            @endforeach
+    <div id="salon1" class="salon">
+        <div id="mesasContainer">
+        <div id="mainTable" class="mesa mesa-principal" data-id="{{ $mesaPrincipal->id }}" style="left: {{ $mesaPrincipal->x }}px; top: {{ $mesaPrincipal->y }}px;">
+            {{ $mesaPrincipal->titulo }}
         </div>
-        <div id="rightList" class="list flex-grow-1">
-            @foreach ($mesas->where('lista', 'derecha') as $mesa)
-                <div class="item" data-id="{{ $mesa->id }}">
-                    {{ $mesa->titulo }}
-                    <div class="chair-left"></div>
-                    <div class="chair-right"></div>
-                </div>
-            @endforeach
-        </div>
+    
+        @foreach ($mesas as $mesa)
+            <div class="mesa" data-id="{{ $mesa->id }}" style="left: {{ $mesa->x }}px; top: {{ $mesa->y }}px;">
+                {{ $mesa->titulo }}
+            </div>
+        @endforeach
     </div>
+    </div>
+    
+    
 
     <!-- Modal -->
     <div class="modal fade" id="configModal" tabindex="-1" aria-labelledby="configModalLabel" aria-hidden="true">
@@ -84,11 +67,7 @@
         </div>
     </div>
 
-    <!-- jsDelivr :: Sortable :: Latest -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sortablejs@latest/Sortable.min.js"></script>
-    <script src="{{ asset('js/scripts.js') }}"></script>
-
+    
     @if ($fechaHoraEvento)
         <script>
            document.addEventListener('DOMContentLoaded', function() {
@@ -121,6 +100,4 @@
         </script>
     @endif
 
-</body>
-
-</html>
+@endsection

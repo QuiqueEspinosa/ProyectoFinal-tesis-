@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -14,6 +15,8 @@ class Mesa extends Model
         'nota',
         'tipo_mesa',
         'posicion',
-        'lista' // Agrega 'lista' aquí
+        'lista',
+        'x',
+        'y',
     ];
 }
