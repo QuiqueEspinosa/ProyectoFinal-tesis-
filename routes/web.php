@@ -4,6 +4,8 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\MesaController;
+use App\Http\Controllers\InvitadoController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -27,3 +29,6 @@ Route::post('/update-positions', [ConfigController::class, 'updatePositions']);
 
 Route::post('/admin/add-table', [AdminController::class, 'addTable'])->name('admin.addTable');
 Route::post('/admin/remove-last-table', [AdminController::class, 'removeLastTable'])->name('admin.removeLastTable');
+
+
+Route::resource('invitados', InvitadoController::class);

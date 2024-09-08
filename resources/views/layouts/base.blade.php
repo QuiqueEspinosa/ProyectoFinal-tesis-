@@ -32,11 +32,11 @@
 
         .sidebar .logo {
             text-align: center;
-            margin-bottom: 20px;
+            margin-bottom: 50px;
         }
 
         .sidebar .logo img {
-            max-width: 80%;
+            max-width: 26%;
             height: auto;
         }
 

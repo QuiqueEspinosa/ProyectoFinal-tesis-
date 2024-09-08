@@ -11,64 +11,41 @@
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     position: relative;
 }
-.logo img {
-    height: 40px;
-}
 
-.nav-links {
+/* Los botones se alinean a la derecha con margin-left: auto */
+.nav-buttons {
     display: flex;
-    align-items: center;
     gap: 1rem;
-    list-style: none;
-    margin: 0;
-    padding: 0;
+    margin-left: auto;
 }
 
-.nav-links li {
-    margin: 0;
-    padding: 0;
-}
-
-.nav-links li a {
-    color: #fff;
-    text-decoration: none;
-    padding: 0.5rem 1rem;
-    transition: background-color 0.3s ease;
-}
-
-.nav-links li a:hover {
-    background-color: #007bff;
-    border-radius: 5px;
-}
-
-.nav-links .btn {
-    margin-left: 1rem;
+.nav-buttons .btn {
     padding: 0.5rem 1rem;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
 
-.nav-links .btn:hover {
+.nav-buttons .btn:hover {
     background-color: #fff;
     color: #007bff;
 }
 
-/* Estilos para centrar el countdown */
+/* El contenedor del countdown se centra con flex-grow y text-align */
 .countdown-container {
     flex-grow: 1;
     text-align: center;
-    font-size: 1.25rem;
+    font-size: 2rem; /* Aumentar el tamaño del texto */
     font-weight: bold;
-  
+    color: white;
 }
 
+
 #countdown {
-    background: #ffffff05;
-    color: #ffffff;
-    padding: 0.5rem 1rem;
-    border-radius: 5px;
+    background-color: #ecd611;
+    color: #000;
+    padding: 1rem 2rem; /* Hacer el countdown más grande */
+    border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease;
-    background-color: #ecd611;
 }
 
 #countdown.pulse {
@@ -89,6 +66,7 @@
         opacity: 1;
     }
 }
+
 
 .btn-outline-light {
     margin: 0 0.5rem;
@@ -119,10 +97,8 @@
 }
 
 .mesa {
-    width: 7vw; /* Ajuste según el viewport */
-    height: 7vw; /* Mantén la proporción */
-    max-width: 70px; /* Tamaño máximo para evitar que se agranden mucho */
-    max-height: 70px; /* Mantén la proporción en pantallas grandes */
+    width: 8vw; /* Ajuste según el viewport */
+    height: 8vw; /* Mantén la proporción */
     background-color: #007bff;
     color: white;
     text-align: center;
@@ -135,10 +111,9 @@
 
 .mesa-principal {
     background-color: #ecd611;
-    width: 7vw;
-    height: 7vw;
-    max-width: 80px;
-    max-height: 80px;
+    width: 8vw;
+    height: 8vw;
+
 }
 
 .mesa.dragging {

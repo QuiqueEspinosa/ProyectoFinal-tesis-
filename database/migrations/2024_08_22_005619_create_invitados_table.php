@@ -15,20 +15,15 @@ return new class extends Migration
             $table->id();
             $table->string('nombre');
             $table->string('apellido');
-            $table->integer('edad');
-            $table->enum('sexo', ['M', 'F', 'Otro']);
-            $table->string('mesa');
-            $table->string('menu');
-            $table->string('lista');
-            $table->string('telefono');
-            $table->string('email')->unique();
-            $table->string('direccion');
-            $table->boolean('invitacion');
-            $table->integer('confirmacion');
+            $table->enum('edad', ['bebe', 'niño', 'adulto']); // Campo edad simplificado
+            $table->enum('sexo', ['M', 'F', 'otro']);
+            $table->enum('menu', ['Adulto', 'Infantil', 'Vegetariano', 'Dietetico']); // Menú por categorías
+            $table->integer('cant_acompanantes')->nullable(); // Campo de acompañantes que puede ser null
+            $table->enum('confirmacion', ['en espera', 'aceptado', 'rechazado'])->default('en espera'); // Confirmación con estado por defecto
+            $table->string('codigo')->unique(); // Campo para el código único
             $table->timestamps();
         });
     }
-    
 
     /**
      * Reverse the migrations.

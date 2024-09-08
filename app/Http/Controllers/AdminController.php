@@ -5,11 +5,13 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\Config;
 use App\Models\Mesa;
+use App\Models\Invitado;
 
 class AdminController extends Controller
 {
     public function index()
     {
+        $invitados = Invitado::all();
         $config = Config::first();
 
         $fechaHoraEvento = $config && $config->fecha_evento && $config->horario
@@ -27,7 +29,7 @@ class AdminController extends Controller
 
         $mesas = Mesa::where('tipo_mesa', 'Común')->orderBy('posicion')->get();
 
-        return view('admin.index', compact('config', 'mesas', 'mesaPrincipal', 'fechaHoraEvento'));
+        return view('admin.index', compact('config', 'mesas', 'mesaPrincipal', 'fechaHoraEvento','invitados'));
     }
 
 

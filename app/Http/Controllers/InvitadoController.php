@@ -3,62 +3,75 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\Invitado;
 
 class InvitadoController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
-    {
-        //
-    }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
 
-    /**
-     * Store a newly created resource in storage.
-     */
+    // Crear un nuevo invitado
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'nombre' => 'required|string|max:255',
+            'apellido' => 'required|string|max:255',
+            'edad' => 'required|string',  // edad será un string para aceptar [bebe, niño, adulto]
+            'sexo' => 'required|in:M,F,Otro',
+            'menu' => 'required|in:Adulto,Infantil,Vegetariano,Dietetico',
+            'cant_acompanantes' => 'nullable|integer',
+            'confirmacion' => 'required|in:en espera,aceptado,rechazado',
+        ]);
+
+        // Crear el invitado con un código generado automáticamente
+        $invitado = Invitado::create([
+            'nombre' => $request->nombre,
+            'apellido' => $request->apellido,
+            'edad' => $request->edad,
+            'sexo' => $request->sexo,
+            'menu' => $request->menu,
+            'cant_acompanantes' => $request->cant_acompanantes,
+            'confirmacion' => $request->confirmacion,
+            'codigo' => strtoupper(bin2hex(random_bytes(3))) // Genera un código de 6 caracteres
+        ]);
+
+
+        // Retornar los datos del invitado recién creado como JSON
+        return response()->json($invitado);
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
+    // Editar un invitado
+    public function edit($id)
     {
-        //
+        $invitado = Invitado::findOrFail($id);
+        return view('admin.invitados.edit', compact('invitado'));
     }
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
+    // Actualizar un invitado
+    public function update(Request $request, $id)
     {
-        //
+        $invitado = Invitado::findOrFail($id);
+
+        $request->validate([
+            'nombre' => 'required|string|max:255',
+            'apellido' => 'required|string|max:255',
+            'edad' => 'required|string',  // edad como string
+            'sexo' => 'required|in:M,F,Otro',
+            'menu' => 'required|in:Adulto,Infantil,Vegetariano,Dietetico',
+            'cant_acompanantes' => 'nullable|integer',
+            'confirmacion' => 'required|in:en espera,aceptado,rechazado',
+        ]);
+
+        $invitado->update($request->all());
+
+        return response()->json(['success' => 'Invitado actualizado exitosamente']);
     }
 
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
+    // Eliminar un invitado
+    public function destroy($id)
     {
-        //
-    }
+        $invitado = Invitado::findOrFail($id);
+        $invitado->delete();
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return response()->json(['success' => 'Invitado eliminado exitosamente']);
     }
 }

@@ -4,100 +4,158 @@
 
 @section('content')
 
-<body>
-    <nav class="navbar">
-        <div class="logo">
-          <img src="{{ asset('images/logo.png') }}" alt="Logo"> 
-        </div>
-        <ul class="nav-links">
-            <li id="countdown-container" class="flex-grow-1 text-center">
+    <body>
+        <nav class="navbar">
+            <div class="countdown-container flex-grow-1 text-center">
                 @if ($fechaHoraEvento)
-                   Faltan: <span id="countdown"></span>
+                    Faltan: <span id="countdown"></span>
                 @else
                     <p>Fecha y hora aún no ingresadas</p>
                 @endif
-            </li>
-            
-            <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#configModal">
-                <i class="bi bi-list-stars"></i> Lista de Invitados
-            </button>
-            <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#configModal">
-                <i class="bi bi-gear"></i> Configuración
-            </button>
-        </ul>
-
-        <div class="hamburger">
-            <span></span>
-            <span></span>
-            <span></span>
-        </div>
-    </nav>
-
-    <div id="salon1" class="salon">
-        <div id="mesasContainer">
-        <div id="mainTable" class="mesa mesa-principal" data-id="{{ $mesaPrincipal->id }}" style="left: {{ $mesaPrincipal->x }}px; top: {{ $mesaPrincipal->y }}px;">
-            {{ $mesaPrincipal->titulo }}
-        </div>
-    
-        @foreach ($mesas as $mesa)
-            <div class="mesa" data-id="{{ $mesa->id }}" style="left: {{ $mesa->x }}px; top: {{ $mesa->y }}px;">
-                {{ $mesa->titulo }}
             </div>
-        @endforeach
-    </div>
-    </div>
-    
-    
 
-    <!-- Modal -->
-    <div class="modal fade" id="configModal" tabindex="-1" aria-labelledby="configModalLabel" aria-hidden="true">
-        <div class="modal-dialog modal-lg">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="configModalLabel">Configuraciones del Evento</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            <div class="nav-buttons">
+                <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#invitadosModal">
+                    Gestionar Invitados
+                </button>
+                <button type="button" class="btn btn-outline-light" data-bs-toggle="modal" data-bs-target="#configModal">
+                    <i class="bi bi-gear"></i> Configuración
+                </button>
+            </div>
+
+            <div class="hamburger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+
+        <div id="salon1" class="salon">
+            <div id="mesasContainer">
+                <div id="mainTable" class="mesa mesa-principal" data-id="{{ $mesaPrincipal->id }}"
+                    style="left: {{ $mesaPrincipal->x }}px; top: {{ $mesaPrincipal->y }}px;">
+                    {{ $mesaPrincipal->titulo }}
                 </div>
-                <div class="modal-body">
-                    @include('admin.config', ['config' => $config])
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
-                </div>
+
+                @foreach ($mesas as $mesa)
+                    <div class="mesa" data-id="{{ $mesa->id }}"
+                        style="left: {{ $mesa->x }}px; top: {{ $mesa->y }}px;">
+                        {{ $mesa->titulo }}
+                    </div>
+                @endforeach
             </div>
         </div>
-    </div>
 
-    
-    @if ($fechaHoraEvento)
-        <script>
-           document.addEventListener('DOMContentLoaded', function() {
-    var eventDate = new Date("{{ $fechaHoraEvento }}").getTime();
-    var countdownElement = document.getElementById('countdown');
 
-    function updateCountdown() {
-        var now = new Date().getTime();
-        var distance = eventDate - now;
 
-        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+        <!-- Modal -->
+        <div class="modal fade" id="configModal" tabindex="-1" aria-labelledby="configModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="configModalLabel">Configuraciones del Evento</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        @include('admin.config', ['config' => $config])
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+        <!-- Modal para gestionar invitados -->
+      
+        <div class="modal fade" id="invitadosModal" tabindex="-1" aria-labelledby="invitadosModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="invitadosModalLabel">Gestionar Invitados</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        @include('admin.invitados')
 
-        if (distance < 0) {
-            clearInterval(x);
-            countdownElement.innerHTML = "¡El evento ha comenzado!";
-            countdownElement.classList.remove('pulse');
-        } else {
-            countdownElement.classList.add('pulse');
-        }
-    }
+                        <!-- Tabla de Invitados -->
+                        <div class="table-responsive mt-4">
+                            <table class="table table-bordered">
+                                <thead>
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Nombre</th>
+                                        <th>Edad</th>
+                                        <th>Sexo</th>
+                                        <th>Menú</th>
+                                        <th>Confirmación</th>
+                                        <th>Acompañantes</th>
+                                        <th>Código</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="listaInvitados">
+                                    @foreach ($invitados as $invitado)
+                                        <tr>
+                                            <td>{{ $loop->iteration }}</td>
+                                            <td>{{ $invitado->nombre }} {{ $invitado->apellido }}</td>
+                                            <td>{{ ucfirst($invitado->edad) }}</td>
+                                            <td>{{ $invitado->sexo }}</td>
+                                            <td>{{ $invitado->menu }}</td>
+                                            <td>
+                                                @if ($invitado->confirmacion == 'aceptado')
+                                                    <span
+                                                        class="badge bg-success">{{ ucfirst($invitado->confirmacion) }}</span>
+                                                @elseif ($invitado->confirmacion == 'rechazado')
+                                                    <span
+                                                        class="badge bg-danger">{{ ucfirst($invitado->confirmacion) }}</span>
+                                                @else
+                                                    <span
+                                                        class="badge bg-warning">{{ ucfirst($invitado->confirmacion) }}</span>
+                                                @endif
+                                            </td>
+                                            <td>{{ $invitado->cant_acompanantes ?? 'N/A' }}</td>
+                                            <td>{{ $invitado->codigo }}</td>
+                                        </tr>
+                                    @endforeach
+                                </tbody>
+                            </table>
+                        </div>
 
-    var x = setInterval(updateCountdown, 1000);
-});
+                    </div>
+                </div>
+            </div>
+        </div>
 
-        </script>
-    @endif
 
-@endsection
+        @if ($fechaHoraEvento)
+            <script>
+                document.addEventListener('DOMContentLoaded', function() {
+                    var eventDate = new Date("{{ $fechaHoraEvento }}").getTime();
+                    var countdownElement = document.getElementById('countdown');
+
+                    function updateCountdown() {
+                        var now = new Date().getTime();
+                        var distance = eventDate - now;
+
+                        var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+                        var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                        var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+                        var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+                        countdownElement.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+                        if (distance < 0) {
+                            clearInterval(x);
+                            countdownElement.innerHTML = "¡El evento ha comenzado!";
+                            countdownElement.classList.remove('pulse');
+                        } else {
+                            countdownElement.classList.add('pulse');
+                        }
+                    }
+
+                    var x = setInterval(updateCountdown, 1000);
+                });
+            </script>
+        @endif
+
+    @endsection
