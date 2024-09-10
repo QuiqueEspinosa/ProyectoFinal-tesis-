@@ -1,4 +1,4 @@
-# 🎉 Proyecto-Final (Tesis): Gestión de Eventos  
+# 🎓 Proyecto-Final (Tesis): Gestión de Eventos  
 **Autor:** Enrique Espinosa  
 **Carrera:** Tecnicatura Universitaria en Desarrollo de Software
 
@@ -35,13 +35,14 @@ La funcionalidad principal de la aplicación es la **gestión de invitados** y l
 
 ## 📦 Tecnologías Utilizadas
 
-| Tecnología  | Uso           |
-|-------------|----------------|
-| Laravel     | Backend        |
-| JavaScript  | Funcionalidad Drag & Drop |
-| Ajax        | Gestión de eventos dinámicos |
-| HTML/CSS    | Estructura y estilo |
-| Bootstrap   | Estilos y diseño responsivo |
+| Tecnología  | Uso           | Logo |
+|-------------|----------------|------|
+| Laravel     | Backend        | ![Laravel](https://img.icons8.com/fluency/48/000000/laravel.png) |
+| JavaScript  | Funcionalidad Drag & Drop | ![JavaScript](https://img.icons8.com/color/48/000000/javascript.png) |
+| Ajax        | Gestión de eventos dinámicos | ![Ajax](https://img.icons8.com/external-flatart-icons-outline-flatarticons/64/000000/external-ajax-seo-flatart-icons-outline-flatarticons.png) |
+| HTML        | Estructura de la web | ![HTML](https://img.icons8.com/color/48/000000/html-5--v1.png) |
+| CSS         | Estilos visuales | ![CSS](https://img.icons8.com/color/48/000000/css3.png) |
+| Bootstrap   | Diseño responsivo | ![Bootstrap](https://img.icons8.com/color/48/000000/bootstrap.png) |
 
 ---
 
@@ -52,8 +53,10 @@ La interfaz de la aplicación ha sido diseñada para ser **amigable y atractiva*
 - **Sidebar** fijo para facilitar la navegación.
 - **Drag & Drop** intuitivo de las mesas.
 - **Actualización dinámica** de la vista sin necesidad de refrescar la página.
-  
-![Sidebar de navegación](https://via.placeholder.com/400x300.png?text=Sidebar+de+Navegacion)
+
+**Animación de desplazamiento de mesas:**
+
+![Animación Drag & Drop](https://via.placeholder.com/800x400.gif?text=Drag+%26+Drop+Animation)
 
 ---
 
@@ -65,13 +68,42 @@ La aplicación incluye suaves **animaciones CSS** para mejorar la experiencia vi
 - Transiciones suaves al abrir y cerrar modales.
 - Efectos de hover en botones y elementos interactivos.
 
-```css
-/* Ejemplo de animación */
-.mesa {
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
+**Vista de apertura de modal de invitados:**
 
-.mesa:hover {
-  transform: scale(1.05);
-  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
-}
+![Animación Modal](https://via.placeholder.com/800x400.gif?text=Modal+Animation)
+
+---
+
+## 📸 Capturas de Pantalla
+
+A continuación se muestran algunas capturas de pantalla que representan las principales funcionalidades de la aplicación:
+
+- **Vista general del evento**:
+  ![Vista general](https://via.placeholder.com/800x400.png?text=Vista+General)
+
+- **Modal de gestión de invitados**:
+  ![Modal de invitados](https://via.placeholder.com/800x400.png?text=Modal+de+Invitados)
+
+---
+
+## 🔧 Instalación
+
+Para clonar y ejecutar este proyecto en tu máquina local, sigue estos pasos:
+
+```bash
+# Clonar el repositorio
+git clone https://github.com/EnriqueEspinosa/proyecto-final-gestion-eventos.git
+
+# Instalar dependencias
+composer install
+npm install
+
+# Configurar .env
+cp .env.example .env
+php artisan key:generate
+
+# Migrar base de datos
+php artisan migrate
+
+# Ejecutar servidor local
+php artisan serve
