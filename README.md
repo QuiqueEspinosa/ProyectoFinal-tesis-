@@ -107,3 +107,15 @@ php artisan migrate
 
 # Ejecutar servidor local
 php artisan serve
+
+
+## 🤝 Contacto
+
+Si tienes alguna duda, comentario o sugerencia sobre este proyecto, puedes contactarme por los siguientes medios:
+
+| Medio        | Información  |
+|--------------|--------------|
+| 📧 **Email**  | [enriqueespinosa2025@gmail.com](mailto:enriqueespinosa2025@gmail.com) |
+| 🐙 **GitHub** | [Quiqueespinosa](https://github.com/Quiqueespinosa) |
+
+![Contacto](https://via.placeholder.com/800x400.png?text=Contacto)
