@@ -35,16 +35,33 @@
                 <div id="mainTable" class="mesa mesa-principal" data-id="{{ $mesaPrincipal->id }}"
                     style="left: {{ $mesaPrincipal->x }}px; top: {{ $mesaPrincipal->y }}px;">
                     {{ $mesaPrincipal->titulo }}
+
+                    <!-- Contenedor de fotos de invitados para la mesa principal -->
+                    <div class="invitados-fotos">
+                        @foreach ($mesaPrincipal->invitados as $invitado)
+                            <img src="{{ asset('images/' . $invitado->foto) }}" class="invitado-foto"
+                                alt="{{ $invitado->nombre }}">
+                        @endforeach
+                    </div>
                 </div>
 
                 @foreach ($mesas as $mesa)
                     <div class="mesa" data-id="{{ $mesa->id }}"
                         style="left: {{ $mesa->x }}px; top: {{ $mesa->y }}px;">
                         {{ $mesa->titulo }}
+
+                        <!-- Contenedor de fotos de invitados para cada mesa -->
+                        <div class="invitados-fotos">
+                            @foreach ($mesa->invitados as $invitado)
+                                <img src="{{ asset('images/' . $invitado->foto) }}" class="invitado-foto"
+                                    alt="{{ $invitado->nombre }}">
+                            @endforeach
+                        </div>
                     </div>
                 @endforeach
             </div>
         </div>
+
 
 
 
@@ -67,26 +84,46 @@
         </div>
 
         <!-- Modal para gestionar invitados -->
-      
+
+        <!-- Modal para gestionar invitados -->
         <div class="modal fade" id="invitadosModal" tabindex="-1" aria-labelledby="invitadosModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
-                    <div class="modal-header">
+                    <div class="modal-header d-flex align-items-center justify-content-between">
                         <h5 class="modal-title" id="invitadosModalLabel">Gestionar Invitados</h5>
+                        <!-- Botón de cerrar -->
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        <!-- Contenedores de estadísticas -->
+                        <div class="d-flex align-items-center ms-3">
+                            <div class="me-2">
+                                <span class="badge bg-warning" id="en-espera-count">En Espera: {{ $enEsperaCount }}</span>
+                            </div>
+                            <div class="me-2">
+                                <span class="badge bg-danger" id="rechazados-count">Rechazados:
+                                    {{ $rechazadosCount }}</span>
+                            </div>
+                            <div class="me-2">
+                                <span class="badge bg-success" id="confirmados-count">Confirmados:
+                                    {{ $confirmadosCount }}</span>
+                            </div>
+                            <span class="badge bg-secondary d-flex align-items-center" id="sin-mesa-count">
+                                <i class="fas fa-exclamation-triangle me-1"></i>
+                                Sin Mesa: {{ $sinMesaCount }}
+                            </span>
+                        </div>
                     </div>
                     <div class="modal-body">
                         @include('admin.invitados')
-
                         <!-- Tabla de Invitados -->
                         <div class="table-responsive mt-4">
                             <table class="table table-bordered">
                                 <thead>
                                     <tr>
                                         <th>#</th>
-                                        <th>Nombre</th>
+                                        <th>Nombre Completo</th>
                                         <th>Edad</th>
                                         <th>Sexo</th>
+                                        <th>Mesa</th>
                                         <th>Menú</th>
                                         <th>Confirmación</th>
                                         <th>Acompañantes</th>
@@ -100,6 +137,8 @@
                                             <td>{{ $invitado->nombre }} {{ $invitado->apellido }}</td>
                                             <td>{{ ucfirst($invitado->edad) }}</td>
                                             <td>{{ $invitado->sexo }}</td>
+                                            <td>{{ $invitado->mesa ? 'Mesa ' . $invitado->mesa->numero_mesa : 'Sin Mesa' }}
+                                            </td>
                                             <td>{{ $invitado->menu }}</td>
                                             <td>
                                                 @if ($invitado->confirmacion == 'aceptado')
@@ -120,12 +159,10 @@
                                 </tbody>
                             </table>
                         </div>
-
                     </div>
                 </div>
             </div>
         </div>
-
 
         @if ($fechaHoraEvento)
             <script>
@@ -157,5 +194,13 @@
                 });
             </script>
         @endif
+
+        <script>
+            // Escuchar el evento cuando el modal se cierra completamente
+            $('#invitadosModal').on('hidden.bs.modal', function() {
+                // Recargar la página completa
+                location.reload();
+            });
+        </script>
 
     @endsection

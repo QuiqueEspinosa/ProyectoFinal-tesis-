@@ -95,17 +95,38 @@
     overflow: hidden;
     margin: 0 auto;
 }
+.invitados-fotos {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    padding: 5px;
+}
+
+.invitado-foto {
+    width: 2vw;
+    height: 2vw;
+    border-radius: 50%;
+    border: 2px solid white;
+    margin: 0.2vw;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
 
 .mesa {
+    position: absolute; /* Asegúrate de que el contenedor esté posicionado correctamente */
     width: 8vw; /* Ajuste según el viewport */
     height: 8vw; /* Mantén la proporción */
     background-color: #007bff;
     color: white;
     text-align: center;
-    line-height: 6vw; /* Centra el texto verticalmente */
+    line-height: 8vw; /* Centra el texto verticalmente */
     border-radius: 50%;
     cursor: move;
-    position: absolute;
     transition: transform 0.2s ease;
 }
 
@@ -115,6 +136,50 @@
     height: 8vw;
 
 }
+/* Fotos de los invitados */
+.invitados-fotos {
+    position: absolute; /* Posición absoluta para colocar alrededor de la mesa */
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.invitados-fotos img {
+    position: absolute; /* Asegura que las imágenes estén posicionadas absolutamente */
+    width: 2vw;
+    height: 2vw;
+    border-radius: 50%;
+    border: 2px solid white;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    pointer-events: none; /* Desactiva la interacción con el ratón */
+}
+.silla-vacia {
+    width: 2vw;
+    height: 2vw;
+    border-radius: 50%;
+    background-color: #e91414;
+    border: 2px solid rgb(12, 12, 12);
+    margin: 0.2vw;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+
+/* Ajusta la posición de las imágenes alrededor de la mesa */
+.invitados-fotos img:nth-child(1) { transform: rotate(0deg) translateX(208%); }
+.invitados-fotos img:nth-child(2) { transform: rotate(30deg) translateX(208%); }
+.invitados-fotos img:nth-child(3) { transform: rotate(60deg) translateX(208%); }
+.invitados-fotos img:nth-child(4) { transform: rotate(90deg) translateX(208%); }
+.invitados-fotos img:nth-child(5) { transform: rotate(120deg) translateX(208%); }
+.invitados-fotos img:nth-child(6) { transform: rotate(150deg) translateX(208%); }
+.invitados-fotos img:nth-child(7) { transform: rotate(180deg) translateX(208%); }
+.invitados-fotos img:nth-child(8) { transform: rotate(210deg) translateX(208%); }
+.invitados-fotos img:nth-child(9) { transform: rotate(240deg) translateX(208%); }
+.invitados-fotos img:nth-child(10) { transform: rotate(270deg) translateX(208%); }
+.invitados-fotos img:nth-child(11) { transform: rotate(300deg) translateX(208%); }
+.invitados-fotos img:nth-child(12) { transform: rotate(330deg) translateX(208%); }
+
 
 .mesa.dragging {
     opacity: 0; /* Reduce la opacidad mientras se arrastra */
@@ -131,6 +196,100 @@
     display: none; /* Ocultar la lista antigua */
 }
 
+
+/* MODAL ESTILOS */
+/* Estilos generales para el modal */
+.modal-content {
+    border-radius: 10px; /* Esquinas redondeadas */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3); /* Sombra más pronunciada */
+}
+
+/* Estilo del encabezado del modal */
+.modal-header {
+    background-color: #007bff; /* Color de fondo */
+    color: white; /* Color del texto */
+    border-bottom: 2px solid #0056b3; /* Línea inferior */
+    padding: 1rem; /* Espaciado */
+    display: flex !important;
+    flex-direction: column !important;
+}
+/* Estilos para los contenedores en el encabezado del modal */
+.modal-header .d-flex {
+    gap: 1rem; /* Espacio entre los contenedores */
+}
+
+
+/* Estilo del título del modal */
+.modal-title {
+    font-size: 1.5rem; /* Tamaño de fuente */
+    font-weight: bold; /* Negrita */
+}
+
+/* Estilo del botón de cerrar */
+.btn-close {
+    margin-left: auto; /* Alinea el botón de cerrar a la derecha */
+    color: rgb(0, 0, 0) !important; /* Color del ícono de cerrar */
+}
+
+/* Estilo del cuerpo del modal */
+.modal-body {
+    padding: 1.5rem; /* Espaciado más grande */
+    font-size: 1rem; /* Tamaño de fuente */
+}
+
+/* Estilo de la tabla dentro del modal */
+.table-responsive {
+    overflow-x: auto; /* Hacer la tabla desplazable horizontalmente */
+    margin-top: 1rem; /* Espaciado superior */
+}
+
+.table-bordered {
+    border: 1px solid #dee2e6; /* Borde de la tabla */
+}
+
+.table th, .table td {
+    padding: 1rem; /* Espaciado en celdas */
+    text-align: left; /* Alinear texto a la izquierda */
+}
+
+.table th {
+    background-color: #f8f9fa; /* Fondo del encabezado de la tabla */
+    border-bottom: 2px solid #dee2e6; /* Borde inferior de encabezados */
+}
+
+.table td {
+    border-bottom: 1px solid #dee2e6; /* Borde inferior de celdas */
+}
+/* Cambiar el color de fondo del modal */
+.modal-dialog {
+    background-color: #f1f1f1; /* Color de fondo del modal */
+    border-radius: 10px; /* Esquinas redondeadas del contenedor del modal */
+    padding: 1rem; /* Espaciado interno del contenedor */
+    max-width: 90vw; /* Ancho máximo para pantallas pequeñas */
+    width: 80%; /* Ancho en pantallas grandes */
+}
+
+/* Animación de apertura del modal */
+.modal.fade .modal-dialog {
+    transform: translate(0, -50px);
+    opacity: 0;
+    transition: transform 0.3s ease-out, opacity 0.3s ease-out;
+}
+
+.modal.show .modal-dialog {
+    transform: translate(0, 0);
+    opacity: 1;
+}
+/* Estilos para los contenedores en el encabezado del modal */
+.modal-header .d-flex {
+    gap: 1rem; /* Espacio entre los contenedores */
+}
+
+.modal-header .badge {
+    font-size: 0.875rem; /* Tamaño de fuente más pequeño */
+    padding: 0.5rem 1rem; /* Espaciado interno */
+    border-radius: 0.5rem; /* Bordes redondeados */
+}
 
 
 @media (max-width: 768px) {

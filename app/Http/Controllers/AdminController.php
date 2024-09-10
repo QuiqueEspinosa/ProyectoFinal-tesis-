@@ -14,6 +14,13 @@ class AdminController extends Controller
         $invitados = Invitado::all();
         $config = Config::first();
 
+         // Contar los invitados por estado
+    $enEsperaCount = $invitados->where('confirmacion', 'en espera')->count();
+    $rechazadosCount = $invitados->where('confirmacion', 'rechazado')->count();
+    $confirmadosCount = $invitados->where('confirmacion', 'aceptado')->count();
+      // Contar los invitados sin mesa asignada
+      $sinMesaCount = $invitados->whereNull('mesa_id')->count();
+
         $fechaHoraEvento = $config && $config->fecha_evento && $config->horario
             ? $config->fecha_evento . ' ' . $config->horario
             : null;
@@ -29,7 +36,7 @@ class AdminController extends Controller
 
         $mesas = Mesa::where('tipo_mesa', 'Común')->orderBy('posicion')->get();
 
-        return view('admin.index', compact('config', 'mesas', 'mesaPrincipal', 'fechaHoraEvento','invitados'));
+        return view('admin.index', compact('config', 'mesas', 'mesaPrincipal', 'fechaHoraEvento','invitados','enEsperaCount', 'rechazadosCount', 'confirmadosCount', 'sinMesaCount'));
     }
 
 

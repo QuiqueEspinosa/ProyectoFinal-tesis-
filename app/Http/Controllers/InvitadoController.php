@@ -7,36 +7,52 @@ use App\Models\Invitado;
 
 class InvitadoController extends Controller
 {
-
-
     // Crear un nuevo invitado
     public function store(Request $request)
     {
-        $request->validate([
-            'nombre' => 'required|string|max:255',
-            'apellido' => 'required|string|max:255',
-            'edad' => 'required|string',  // edad será un string para aceptar [bebe, niño, adulto]
-            'sexo' => 'required|in:M,F,Otro',
-            'menu' => 'required|in:Adulto,Infantil,Vegetariano,Dietetico',
+        $validated = $request->validate([
+            'nombre' => 'required|string',
+            'apellido' => 'required|string',
+            'edad' => 'required|string',
+            'sexo' => 'required|string',
+            'mesa_id' => 'nullable|exists:mesas,id', // Asegura que la mesa exista
+            'menu' => 'required|string',
             'cant_acompanantes' => 'nullable|integer',
-            'confirmacion' => 'required|in:en espera,aceptado,rechazado',
+
         ]);
 
-        // Crear el invitado con un código generado automáticamente
+        // Asignar la imagen de perfil según el sexo
+        $foto = $this->asignarFotoPerfil($validated['sexo']); // Cambié a 'foto' para que sea consistente
+
+        // Crear invitado
         $invitado = Invitado::create([
-            'nombre' => $request->nombre,
-            'apellido' => $request->apellido,
-            'edad' => $request->edad,
-            'sexo' => $request->sexo,
-            'menu' => $request->menu,
-            'cant_acompanantes' => $request->cant_acompanantes,
-            'confirmacion' => $request->confirmacion,
-            'codigo' => strtoupper(bin2hex(random_bytes(3))) // Genera un código de 6 caracteres
+            'nombre' => $validated['nombre'],
+            'apellido' => $validated['apellido'],
+            'edad' => $validated['edad'],
+            'sexo' => $validated['sexo'],
+            'mesa_id' => $validated['mesa_id'], // Ahora usa 'mesa_id' y no 'mesa'
+            'menu' => $validated['menu'],
+            'cant_acompanantes' => $validated['cant_acompanantes'],
+            'codigo' => strtoupper(bin2hex(random_bytes(3))), // Código único
+            'confirmacion' => 'en espera', // Valor predeterminado
+            'foto' => $foto, // Guardar la foto de perfil
         ]);
 
-
-        // Retornar los datos del invitado recién creado como JSON
+        $invitado = Invitado::with('mesa')->find($invitado->id);
         return response()->json($invitado);
+      
+    }
+
+    private function asignarFotoPerfil($sexo)
+    {
+        switch ($sexo) {
+            case 'M':
+                return 'usuariohombre.png'; // Imagen de perfil para hombres
+            case 'F':
+                return 'usuarioMujer.png';  // Imagen de perfil para mujeres
+            default:
+                return 'UsuarioOtro.png'; // Imagen de perfil para otro/usuario genérico
+        }
     }
 
     // Editar un invitado
@@ -54,7 +70,7 @@ class InvitadoController extends Controller
         $request->validate([
             'nombre' => 'required|string|max:255',
             'apellido' => 'required|string|max:255',
-            'edad' => 'required|string',  // edad como string
+            'edad' => 'required|string',  // Edad como string
             'sexo' => 'required|in:M,F,Otro',
             'menu' => 'required|in:Adulto,Infantil,Vegetariano,Dietetico',
             'cant_acompanantes' => 'nullable|integer',

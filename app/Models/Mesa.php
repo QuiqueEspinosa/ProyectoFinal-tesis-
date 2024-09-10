@@ -19,4 +19,9 @@ class Mesa extends Model
         'x',
         'y',
     ];
+       // Relación con Invitados
+       public function invitados()
+       {
+           return $this->hasMany(Invitado::class);
+       }
 }

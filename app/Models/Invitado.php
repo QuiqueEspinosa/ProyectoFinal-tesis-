@@ -17,9 +17,11 @@ class Invitado extends Model
         'edad',
         'sexo',
         'menu',
-        'cant_acompañantes',
+        'cant_acompanantes', // Sin tilde
         'confirmacion',
         'codigo',
+        'mesa_id', // Relación con la tabla de mesas
+        'foto', // Campo para la foto
     ];
 
     // Mutator para establecer un valor predeterminado para el campo código si no se proporciona
@@ -32,5 +34,11 @@ class Invitado extends Model
                 $invitado->codigo = strtoupper(bin2hex(random_bytes(3))); // Genera un código único de 6 caracteres
             }
         });
+    }
+
+    // Relación con la tabla 'mesas' si es necesario
+    public function mesa()
+    {
+        return $this->belongsTo(Mesa::class);
     }
 }

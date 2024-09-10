@@ -13,14 +13,16 @@ return new class extends Migration
     {
         Schema::create('invitados', function (Blueprint $table) {
             $table->id();
+            $table->string('foto')->nullable(); // Campo para la foto del invitado
             $table->string('nombre');
             $table->string('apellido');
-            $table->enum('edad', ['bebe', 'niño', 'adulto']); // Campo edad simplificado
+            $table->enum('edad', ['bebe', 'niño', 'adulto']);
             $table->enum('sexo', ['M', 'F', 'otro']);
-            $table->enum('menu', ['Adulto', 'Infantil', 'Vegetariano', 'Dietetico']); // Menú por categorías
-            $table->integer('cant_acompanantes')->nullable(); // Campo de acompañantes que puede ser null
-            $table->enum('confirmacion', ['en espera', 'aceptado', 'rechazado'])->default('en espera'); // Confirmación con estado por defecto
-            $table->string('codigo')->unique(); // Campo para el código único
+            $table->enum('menu', ['Adulto', 'Infantil', 'Vegetariano', 'Dietetico']);
+            $table->integer('cant_acompanantes')->nullable();
+            $table->enum('confirmacion', ['en espera', 'aceptado', 'rechazado'])->default('en espera');
+            $table->string('codigo')->unique();
+            $table->foreignId('mesa_id')->nullable()->constrained('mesas')->onDelete('set null'); // Relación con la tabla mesas.
             $table->timestamps();
         });
     }

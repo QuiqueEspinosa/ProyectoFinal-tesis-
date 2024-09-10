@@ -62,5 +62,19 @@ document.addEventListener('DOMContentLoaded', () => {
         .catch(error => {
             console.error('Error al guardar las posiciones:', error);
         });
+        
     }
+
+    function agregarInvitado(invitado) {
+        const mesa = document.querySelector(`.mesa[data-id="${invitado.mesa_id}"]`);
+        const sillaVacia = mesa.querySelector('.silla-vacia');
+        if (sillaVacia) {
+            const img = document.createElement('img');
+            img.src = `/images/${invitado.foto}`;
+            img.alt = invitado.nombre;
+            img.classList.add('invitado-foto');
+            sillaVacia.replaceWith(img); // Reemplaza la silla vacía con la imagen
+        }
+    }
+    
 });
