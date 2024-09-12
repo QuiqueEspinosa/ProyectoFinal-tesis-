@@ -83,7 +83,6 @@
             </div>
         </div>
 
-        <!-- Modal para gestionar invitados -->
 
         <!-- Modal para gestionar invitados -->
         <div class="modal fade" id="invitadosModal" tabindex="-1" aria-labelledby="invitadosModalLabel" aria-hidden="true">
@@ -128,6 +127,7 @@
                                         <th>Confirmación</th>
                                         <th>Acompañantes</th>
                                         <th>Código</th>
+                                        <th>Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody id="listaInvitados">
@@ -154,6 +154,14 @@
                                             </td>
                                             <td>{{ $invitado->cant_acompanantes ?? 'N/A' }}</td>
                                             <td>{{ $invitado->codigo }}</td>
+                                            <td>
+                                                <!-- Botón Editar -->
+                                                <button class="btn btn-primary btn-sm"
+                                                    onclick="editarInvitado({{ $invitado->id }})">Editar</button>
+                                                <!-- Botón Eliminar -->
+                                                <button class="btn btn-danger btn-sm"
+                                                    onclick="eliminarInvitado({{ $invitado->id }})">Eliminar</button>
+                                            </td>
                                         </tr>
                                     @endforeach
                                 </tbody>
@@ -163,6 +171,76 @@
                 </div>
             </div>
         </div>
+        
+        <!-- Submodal para edición de invitados -->
+        <div class="modal fade" id="submodal" tabindex="-1" aria-labelledby="submodalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="submodalLabel">Editar Invitado</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                        @if (isset($invitado) && $invitado)
+                            @include('admin.edit_invitado', ['invitado' => $invitado])
+                        @else
+                            <p>No hay invitados disponibles para editar.</p>
+                        @endif
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+
+        <script>
+            async function editarInvitado(id) {
+                // Mostrar el submodal inmediatamente con un indicador de carga
+                const submodal = new bootstrap.Modal(document.getElementById('submodal'));
+                const submodalBody = document.querySelector('#submodal .modal-body');
+
+                // Mostrar el submodal de inmediato con un spinner de carga
+
+                submodal.show();
+
+                try {
+                    // Realizar la petición fetch para obtener el formulario de edición
+                    const response = await fetch(`/invitados/${id}/edit`);
+                    const html = await response.text();
+
+                    // Reemplazar el contenido del submodal con el formulario de edición
+                    submodalBody.innerHTML = html;
+
+                    // Configurar la acción del formulario con el ID del invitado
+                    document.getElementById('formInvitadoEdit').action = `/invitados/${id}`;
+
+                } catch (error) {
+                    console.error('Error al cargar el formulario de edición:', error);
+                    // Mostrar un mensaje de error en caso de que la carga falle
+                    submodalBody.innerHTML =
+                        '<p class="text-danger">Error al cargar los datos del invitado. Intenta nuevamente.</p>';
+                }
+            }
+
+            function eliminarInvitado(id) {
+                if (confirm('¿Estás seguro de que deseas eliminar este invitado?')) {
+                    $.ajax({
+                        url: `/invitados/${id}`,
+                        type: 'DELETE',
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function(response) {
+                            alert(response.success);
+                            recargarListaInvitados(); // Recargar solo la lista de invitados
+                        }
+                    });
+                }
+            }
+        </script>
 
         @if ($fechaHoraEvento)
             <script>

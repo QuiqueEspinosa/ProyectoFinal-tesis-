@@ -2,6 +2,10 @@
 <form id="formInvitado" method="POST" action="{{ route('invitados.store') }}">
     @csrf
     <div class="row">
+        <div class="col-md-12">
+            <!-- Contenedor para mensajes de error -->
+            <div id="error-message" class="alert alert-danger d-none"></div>
+        </div>
         <div class="col-md-6">
             <div class="mb-3">
                 <label for="nombre" class="form-label">Nombre</label>
@@ -60,55 +64,64 @@
 
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
-    $(document).ready(function() {
-        $('#formInvitado').submit(function(event) {
-            event.preventDefault();
+ $(document).ready(function() {
+    $('#formInvitado').submit(function(event) {
+        event.preventDefault();
 
-            var formData = $(this).serialize();
+        var formData = $(this).serialize();
 
-            $.ajax({
-                url: $(this).attr('action'),
-                method: $(this).attr('method'),
-                data: formData,
-                success: function(response) {
-                    $('#listaInvitados').append(`
-                        <tr>
-                            <td>${$('#listaInvitados tr').length + 1}</td>
-                            <td>${response.nombre} ${response.apellido}</td>
-                            <td>${response.edad}</td>
-                            <td>${response.sexo}</td>
-                            <td>Mesa ${response.mesa.numero_mesa}</td>
-                            <td>${response.menu}</td>
-                            <td>
-                                ${response.confirmacion == 'aceptado' ? 
-                                    '<span class="badge bg-success">Aceptado</span>' : 
-                                    response.confirmacion == 'rechazado' ? 
-                                    '<span class="badge bg-danger">Rechazado</span>' : 
-                                    '<span class="badge bg-warning">En espera</span>'
-                                }
-                            </td>
-                            <td>${response.cant_acompanantes || 'N/A'}</td>
-                            <td>${response.codigo}</td>
-                        </tr>
-                    `);
+        $.ajax({
+            url: $(this).attr('action'),
+            method: $(this).attr('method'),
+            data: formData,
+            success: function(response) {
+                // Limpiar el mensaje de error
+                $('#error-message').addClass('d-none').text('');
 
-                    $('#formInvitado')[0].reset();
-                    alert('Invitado agregado con éxito');
-                },
-                error: function(xhr) {
-                    console.log(xhr.responseJSON); // Mostrar errores en la consola
-                    if(xhr.status === 422) {
-                        let errors = xhr.responseJSON.errors;
-                        let errorMessages = '';
-                        $.each(errors, function(key, value) {
-                            errorMessages += value + '\n';
-                        });
-                        alert('Errores de validación:\n' + errorMessages);
-                    } else {
-                        alert('Hubo un error al agregar el invitado');
-                    }
+                // Agregar el nuevo invitado a la tabla
+                $('#listaInvitados').append(`
+                    <tr>
+                        <td>${$('#listaInvitados tr').length + 1}</td>
+                        <td>${response.nombre} ${response.apellido}</td>
+                        <td>${response.edad}</td>
+                        <td>${response.sexo}</td>
+                        <td>${response.mesa ? 'Mesa ' + (response.mesa.numero_mesa || 'Sin Número') : 'Sin Mesa'}</td>
+                        <td>${response.menu}</td>
+                        <td>
+                            ${response.confirmacion == 'aceptado' ? 
+                                '<span class="badge bg-success">Aceptado</span>' : 
+                                response.confirmacion == 'rechazado' ? 
+                                '<span class="badge bg-danger">Rechazado</span>' : 
+                                '<span class="badge bg-warning">En espera</span>'
+                            }
+                        </td>
+                        <td>${response.cant_acompanantes || 'N/A'}</td>
+                        <td>${response.codigo}</td>
+                    </tr>
+                `);
+
+                // Limpiar el formulario
+                $('#formInvitado')[0].reset();
+            },
+            error: function(xhr) {
+                if (xhr.status === 400 && xhr.responseJSON && xhr.responseJSON.error) {
+                    // Mostrar el mensaje de error de "mesa llena"
+                    $('#error-message').removeClass('d-none').text(xhr.responseJSON.error);
+                } else if (xhr.status === 422) {
+                    // Mostrar errores de validación
+                    let errors = xhr.responseJSON.errors;
+                    let errorMessages = '';
+                    $.each(errors, function(key, value) {
+                        errorMessages += value + '<br>';
+                    });
+                    $('#error-message').removeClass('d-none').html(errorMessages);
+                } else {
+                    // Otro error inesperado
+                    $('#error-message').removeClass('d-none').text('Hubo un error al agregar el invitado.');
                 }
-            });
+            }
         });
     });
+});
+
 </script>

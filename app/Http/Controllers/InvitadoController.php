@@ -4,25 +4,44 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Invitado;
-
+use App\Models\Mesa;
+use App\Models\Config;
 class InvitadoController extends Controller
 {
     // Crear un nuevo invitado
     public function store(Request $request)
     {
+        // Validar los datos del request
         $validated = $request->validate([
             'nombre' => 'required|string',
             'apellido' => 'required|string',
             'edad' => 'required|string',
             'sexo' => 'required|string',
-            'mesa_id' => 'nullable|exists:mesas,id', // Asegura que la mesa exista
+            'mesa_id' => 'nullable|exists:mesas,id',
             'menu' => 'required|string',
             'cant_acompanantes' => 'nullable|integer',
-
         ]);
 
         // Asignar la imagen de perfil según el sexo
-        $foto = $this->asignarFotoPerfil($validated['sexo']); // Cambié a 'foto' para que sea consistente
+        $foto = $this->asignarFotoPerfil($validated['sexo']);
+
+        // Verificar si se ha seleccionado una mesa
+        if ($validated['mesa_id']) {
+            // Obtener la mesa a la que se asignará el invitado
+            $mesa = Mesa::find($validated['mesa_id']);
+
+            // Obtener la cantidad de sillas permitidas por mesa desde la configuración
+            $config = Config::first();
+            $maxSillas = $config->cant_sillas;
+
+            // Contar los invitados ya asignados a esa mesa, incluyendo acompañantes
+            $invitadosEnMesa = Invitado::where('mesa_id', $mesa->id)->sum('cant_acompanantes') + Invitado::where('mesa_id', $mesa->id)->count();
+
+            // Verificar si la mesa ya está llena
+            if ($invitadosEnMesa >= $maxSillas) {
+                return response()->json(['error' => 'La mesa ' . $mesa->numero_mesa . ' está llena.'], 400);
+            }
+        }
 
         // Crear invitado
         $invitado = Invitado::create([
@@ -30,39 +49,38 @@ class InvitadoController extends Controller
             'apellido' => $validated['apellido'],
             'edad' => $validated['edad'],
             'sexo' => $validated['sexo'],
-            'mesa_id' => $validated['mesa_id'], // Ahora usa 'mesa_id' y no 'mesa'
+            'mesa_id' => $validated['mesa_id'],
             'menu' => $validated['menu'],
             'cant_acompanantes' => $validated['cant_acompanantes'],
-            'codigo' => strtoupper(bin2hex(random_bytes(3))), // Código único
-            'confirmacion' => 'en espera', // Valor predeterminado
-            'foto' => $foto, // Guardar la foto de perfil
+            'codigo' => strtoupper(bin2hex(random_bytes(3))),
+            'confirmacion' => 'en espera',
+            'foto' => $foto,
         ]);
 
-        $invitado = Invitado::with('mesa')->find($invitado->id);
-        return response()->json($invitado);
-      
+        // Devolver la respuesta con el invitado creado
+        return response()->json(Invitado::with('mesa')->find($invitado->id));
     }
+
 
     private function asignarFotoPerfil($sexo)
     {
         switch ($sexo) {
             case 'M':
-                return 'usuariohombre.png'; // Imagen de perfil para hombres
+                return 'usuariohombre.png';
             case 'F':
-                return 'usuarioMujer.png';  // Imagen de perfil para mujeres
+                return 'usuariomujer.png';
             default:
-                return 'UsuarioOtro.png'; // Imagen de perfil para otro/usuario genérico
+                return 'usuariootro.png';
         }
     }
 
-    // Editar un invitado
     public function edit($id)
     {
         $invitado = Invitado::findOrFail($id);
-        return view('admin.invitados.edit', compact('invitado'));
+        $mesas = Mesa::where('tipo_mesa', 'Común')->orderBy('posicion')->get();
+        return view('admin.edit_invitado', compact('invitado', 'mesas'));
     }
 
-    // Actualizar un invitado
     public function update(Request $request, $id)
     {
         $invitado = Invitado::findOrFail($id);
@@ -70,24 +88,31 @@ class InvitadoController extends Controller
         $request->validate([
             'nombre' => 'required|string|max:255',
             'apellido' => 'required|string|max:255',
-            'edad' => 'required|string',  // Edad como string
+            'edad' => 'required|string',
+            'mesa_id' => 'nullable|exists:mesas,id',
             'sexo' => 'required|in:M,F,Otro',
             'menu' => 'required|in:Adulto,Infantil,Vegetariano,Dietetico',
             'cant_acompanantes' => 'nullable|integer',
-            'confirmacion' => 'required|in:en espera,aceptado,rechazado',
+            'confirmacion' => 'required|in:en espera,aceptado,rechazado', // Validar la confirmación
         ]);
 
+        // Actualizar el invitado con los nuevos datos, incluyendo 'confirmacion'
         $invitado->update($request->all());
 
-        return response()->json(['success' => 'Invitado actualizado exitosamente']);
+        // Devolver una respuesta JSON
+        return back()->with('success', 'Invitado actualizado correctamente');
     }
 
-    // Eliminar un invitado
+
     public function destroy($id)
     {
-        $invitado = Invitado::findOrFail($id);
-        $invitado->delete();
-
-        return response()->json(['success' => 'Invitado eliminado exitosamente']);
+        $invitado = Invitado::find($id);
+        if ($invitado) {
+            $invitado->delete();
+            return response()->json(['success' => 'Eliminado Correctamente']);
+        } else {
+            return response()->json(['success' => 'No se Pudo Eliminar'], 404);
+        }
     }
+
 }
