@@ -96,9 +96,19 @@ class InvitadoController extends Controller
             'confirmacion' => 'required|in:en espera,aceptado,rechazado', // Validar la confirmación
         ]);
 
-        // Actualizar el invitado con los nuevos datos, incluyendo 'confirmacion'
-        $invitado->update($request->all());
+        // Actualizar los datos del invitado, excepto 'mesa_id' ya que lo manejaremos manualmente
+        $invitado->update($request->except('mesa_id'));
 
+        // Si el estado de confirmación es 'rechazado', asignar mesa_id como null
+        if ($request->confirmacion == 'rechazado') {
+            $invitado->mesa_id = null;
+        } else {
+            // Si no está rechazado, actualizar 'mesa_id' normalmente
+            $invitado->mesa_id = $request->mesa_id;
+        }
+
+        // Guardar los cambios manualmente después de actualizar mesa_id
+        $invitado->save();
         // Devolver una respuesta JSON
         return back()->with('success', 'Invitado actualizado correctamente');
     }

@@ -32,35 +32,58 @@
 
         <div id="salon1" class="salon">
             <div id="mesasContainer">
+                <!-- Mesa principal -->
                 <div id="mainTable" class="mesa mesa-principal" data-id="{{ $mesaPrincipal->id }}"
-                    style="left: {{ $mesaPrincipal->x }}px; top: {{ $mesaPrincipal->y }}px;">
+                    style="left: {{ $mesaPrincipal->x }}px; top: {{ $mesaPrincipal->y }}px;"
+                    onclick="mostrarInfoMesa(event, {{ $mesaPrincipal->id }})">
                     {{ $mesaPrincipal->titulo }}
-
+        
                     <!-- Contenedor de fotos de invitados para la mesa principal -->
                     <div class="invitados-fotos">
                         @foreach ($mesaPrincipal->invitados as $invitado)
-                            <img src="{{ asset('images/' . $invitado->foto) }}" class="invitado-foto"
-                                alt="{{ $invitado->nombre }}">
+                            @if($invitado->confirmacion !== 'rechazado') <!-- No muestra invitados rechazados -->
+                                <img src="{{ asset('images/' . $invitado->foto) }}"
+                                    class="invitado-foto 
+                                        @if($invitado->confirmacion == 'aceptado') confirmado 
+                                        @elseif($invitado->confirmacion == 'en espera') en-espera @endif"
+                                    alt="{{ $invitado->nombre }}">
+                            @endif
                         @endforeach
                     </div>
                 </div>
-
+        
+                <!-- Otras mesas -->
                 @foreach ($mesas as $mesa)
                     <div class="mesa" data-id="{{ $mesa->id }}"
-                        style="left: {{ $mesa->x }}px; top: {{ $mesa->y }}px;">
+                        style="left: {{ $mesa->x }}px; top: {{ $mesa->y }}px;"
+                        onclick="mostrarInfoMesa(event, {{ $mesa->id }})">
                         {{ $mesa->titulo }}
-
+        
                         <!-- Contenedor de fotos de invitados para cada mesa -->
                         <div class="invitados-fotos">
                             @foreach ($mesa->invitados as $invitado)
-                                <img src="{{ asset('images/' . $invitado->foto) }}" class="invitado-foto"
-                                    alt="{{ $invitado->nombre }}">
+                                @if($invitado->confirmacion !== 'rechazado') <!-- No muestra invitados rechazados -->
+                                    <img src="{{ asset('images/' . $invitado->foto) }}"
+                                        class="invitado-foto 
+                                            @if($invitado->confirmacion == 'aceptado') confirmado 
+                                            @elseif($invitado->confirmacion == 'en espera') en-espera @endif"
+                                        alt="{{ $invitado->nombre }}">
+                                @endif
                             @endforeach
                         </div>
                     </div>
                 @endforeach
             </div>
         </div>
+        
+
+        <!-- Información de la mesa (oculto inicialmente) -->
+        <div id="infoMesa" class="info-mesa" style="display:none;">
+            <button id="cerrarInfoMesa" class="cerrar-btn">&times;</button> <!-- Botón con la X -->
+            <p id="nombresInvitados"></p>
+            <p id="sillasRestantes"></p>
+        </div>
+
 
 
 
@@ -171,7 +194,7 @@
                 </div>
             </div>
         </div>
-        
+
         <!-- Submodal para edición de invitados -->
         <div class="modal fade" id="submodal" tabindex="-1" aria-labelledby="submodalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">
@@ -279,6 +302,42 @@
                 // Recargar la página completa
                 location.reload();
             });
+        </script>
+        <script>
+            document.getElementById('cerrarInfoMesa').addEventListener('click', function() {
+                document.getElementById('infoMesa').style.display = 'none';
+            });
+
+            function mostrarInfoMesa(event, mesaId) {
+                const infoMesa = document.getElementById('infoMesa');
+
+                // Obtener la mesa correspondiente con sus datos
+                $.ajax({
+                    url: `/mesas/${mesaId}/info`,
+                    method: 'GET',
+                    success: function(response) {
+                        const invitados = response.invitados;
+                        const maxSillas = response.cant_sillas;
+                        const invitadosCount = invitados.length;
+                        const sillasRestantes = maxSillas - invitadosCount;
+
+                        // Mostrar los nombres de los invitados y las sillas restantes
+                        document.getElementById('nombresInvitados').innerHTML = 'Invitados: ' + invitados.map(i => i
+                            .nombre).join(', ');
+                        document.getElementById('sillasRestantes').innerHTML = 'Sillas restantes: ' +
+                            sillasRestantes;
+
+                        // Posicionar el cuadro de información cerca del clic
+                        infoMesa.style.left = event.pageX + 'px';
+                        infoMesa.style.top = event.pageY + 'px';
+                        infoMesa.style.display = 'block';
+                    }
+                });
+            }
+
+            function ocultarInfoMesa() {
+                document.getElementById('infoMesa').style.display = 'none';
+            }
         </script>
 
     @endsection

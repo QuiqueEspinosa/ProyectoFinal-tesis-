@@ -77,5 +77,18 @@ class AdminController extends Controller
 
         return response()->json(['success' => false, 'message' => 'No hay mesas para eliminar'], 404);
     }
-
+    public function getMesaInfo($id)
+    {
+        $mesa = Mesa::with('invitados')->find($id);
+        $config = Config::first();
+    
+        if ($mesa) {
+            return response()->json([
+                'invitados' => $mesa->invitados,
+                'cant_sillas' => $config->cant_sillas
+            ]);
+        } else {
+            return response()->json(['error' => 'Mesa no encontrada'], 404);
+        }
+    }
 }

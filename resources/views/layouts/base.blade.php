@@ -11,11 +11,28 @@
     <link rel="stylesheet" href="{{ asset('css/estilos.css') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap" rel="stylesheet">
+
     <style>
         body {
-            font-family: Arial, sans-serif;
+            font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
+            background-color: #333
+        }
+
+        h1,
+        h2,
+        h3 {
+            font-family: 'Poppins', sans-serif;
+         
+            /* Ejemplo de cómo controlar el peso de la fuente */
+        }
+
+        p {
+            font-family: 'Poppins', sans-serif;
+   
+            /* Peso normal de la fuente */
         }
 
         /* Sidebar */

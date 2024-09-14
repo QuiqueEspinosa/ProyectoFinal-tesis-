@@ -73,20 +73,6 @@
 }
 
 
-.hamburger {
-    display: none;
-    flex-direction: column;
-    cursor: pointer;
-}
-
-.hamburger span {
-    height: 3px;
-    width: 25px;
-    background-color: white;
-    margin: 4px 0;
-    transition: 0.3s;
-}
-
 #salon1 {
     position: relative;
     width: 87vw;
@@ -94,6 +80,49 @@
     border: 1px solid #ccc;
     overflow: hidden;
     margin: 0 auto;
+}
+.mesa {
+    position: absolute; /* Asegúrate de que el contenedor esté posicionado correctamente */
+    width: 8vw; /* Ajuste según el viewport */
+    height: 8vw; /* Mantén la proporción */
+    background-color: #ea00ff;
+    color: white;
+    text-align: center;
+    line-height: 8vw; /* Centra el texto verticalmente */
+    border-radius: 50%;
+    cursor: move;
+    transition: transform 0.2s ease;
+}
+
+.mesa-principal {
+    position: relative;
+    background-color: #11e8ec;
+    width: 8vw;
+    height: 8vw;
+    font-size: 15px; /* Ajusta según el tamaño necesario */
+}
+
+.mesa.dragging {
+    opacity: 0; /* Reduce la opacidad mientras se arrastra */
+    transform: scale(1.05); /* Escala ligeramente el elemento para destacarlo */
+    z-index: 1000; /* Asegúrate de que el elemento arrastrado esté sobre los demás */
+}
+.mesa.highlight {
+    border: 2px solid #007bff; /* Agrega un borde azul cuando se selecciona */
+    box-shadow: 0 0 10px rgba(0, 123, 255, 0.5); /* Agrega una sombra para resaltar el elemento */
+    transition: box-shadow 0.3s ease; /* Transición suave para la sombra */
+}
+/* Estilos base para el cartel de información */
+.info-mesa {
+    position: absolute;
+    background-color: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+    max-width: 300px;
+    width: 90%;
 }
 .invitados-fotos {
     position: absolute;
@@ -112,39 +141,11 @@
     width: 2vw;
     height: 2vw;
     border-radius: 50%;
-    border: 2px solid white;
+    border: 7px solid transparent; /* Valor por defecto */
     margin: 0.2vw;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
 }
 
-.mesa {
-    position: absolute; /* Asegúrate de que el contenedor esté posicionado correctamente */
-    width: 8vw; /* Ajuste según el viewport */
-    height: 8vw; /* Mantén la proporción */
-    background-color: #007bff;
-    color: white;
-    text-align: center;
-    line-height: 8vw; /* Centra el texto verticalmente */
-    border-radius: 50%;
-    cursor: move;
-    transition: transform 0.2s ease;
-}
-
-.mesa-principal {
-    background-color: #ecd611;
-    width: 8vw;
-    height: 8vw;
-
-}
-/* Fotos de los invitados */
-.invitados-fotos {
-    position: absolute; /* Posición absoluta para colocar alrededor de la mesa */
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
 
 .invitados-fotos img {
     position: absolute; /* Asegura que las imágenes estén posicionadas absolutamente */
@@ -155,42 +156,76 @@
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
     pointer-events: none; /* Desactiva la interacción con el ratón */
 }
-.silla-vacia {
-    width: 2vw;
-    height: 2vw;
-    border-radius: 50%;
-    background-color: #e91414;
-    border: 2px solid rgb(12, 12, 12);
-    margin: 0.2vw;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+
+.confirmado {
+    border-color: green !important; /* Borde verde para confirmados */
+}
+
+.en-espera {
+    border-color: rgb(255, 234, 9) !important; /* Borde amarillo para los que están en espera */
 }
 
 
 /* Ajusta la posición de las imágenes alrededor de la mesa */
-.invitados-fotos img:nth-child(1) { transform: rotate(0deg) translateX(208%); }
-.invitados-fotos img:nth-child(2) { transform: rotate(30deg) translateX(208%); }
-.invitados-fotos img:nth-child(3) { transform: rotate(60deg) translateX(208%); }
-.invitados-fotos img:nth-child(4) { transform: rotate(90deg) translateX(208%); }
-.invitados-fotos img:nth-child(5) { transform: rotate(120deg) translateX(208%); }
-.invitados-fotos img:nth-child(6) { transform: rotate(150deg) translateX(208%); }
-.invitados-fotos img:nth-child(7) { transform: rotate(180deg) translateX(208%); }
-.invitados-fotos img:nth-child(8) { transform: rotate(210deg) translateX(208%); }
-.invitados-fotos img:nth-child(9) { transform: rotate(240deg) translateX(208%); }
+.invitados-fotos img:nth-child(1) {
+    transform: rotate(-14deg) translateX(208%) rotate(0deg);
+}
+.invitados-fotos img:nth-child(2) {
+    transform: rotate(30deg) translateX(208%) rotate(-30deg);
+}
+.invitados-fotos img:nth-child(3) {
+    transform: rotate(68deg) translateX(208%) rotate(-60deg);
+}
+.invitados-fotos img:nth-child(4) {
+    transform: rotate(109deg) translateX(208%) rotate(-90deg);
+}
+.invitados-fotos img:nth-child(5) {
+    transform: rotate(158deg) translateX(208%) rotate(-163deg);
+}
+.invitados-fotos img:nth-child(6) {
+    transform: rotate(199deg) translateX(208%) rotate(-197deg);
+}
+.invitados-fotos img:nth-child(7) {
+    transform: rotate(240deg) translateX(208%) rotate(-241deg);
+}
+.invitados-fotos img:nth-child(8) {
+    transform: rotate(292deg) translateX(208%) rotate(73deg)
+}
+
+/* .invitados-fotos img:nth-child(9) { transform: rotate(240deg) translateX(208%); }
 .invitados-fotos img:nth-child(10) { transform: rotate(270deg) translateX(208%); }
 .invitados-fotos img:nth-child(11) { transform: rotate(300deg) translateX(208%); }
-.invitados-fotos img:nth-child(12) { transform: rotate(330deg) translateX(208%); }
+.invitados-fotos img:nth-child(12) { transform: rotate(330deg) translateX(208%); } */
 
 
-.mesa.dragging {
-    opacity: 0; /* Reduce la opacidad mientras se arrastra */
-    transform: scale(1.05); /* Escala ligeramente el elemento para destacarlo */
-    z-index: 1000; /* Asegúrate de que el elemento arrastrado esté sobre los demás */
+
+
+/* Responsivo para pantallas pequeñas */
+@media (max-width: 600px) {
+    .info-mesa {
+        bottom: 10px;
+        right: 10px;
+        padding: 15px;
+    }
 }
-.mesa.highlight {
-    border: 2px solid #007bff; /* Agrega un borde azul cuando se selecciona */
-    box-shadow: 0 0 10px rgba(0, 123, 255, 0.5); /* Agrega una sombra para resaltar el elemento */
-    transition: box-shadow 0.3s ease; /* Transición suave para la sombra */
+
+/* Botón para cerrar con la X */
+.cerrar-btn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: none;
+    border: none;
+    font-size: 20px;
+    font-weight: bold;
+    cursor: pointer;
+    color: #ffffff;
 }
+
+.cerrar-btn:hover {
+    color: red;
+}
+
 
 .list {
     display: none; /* Ocultar la lista antigua */
