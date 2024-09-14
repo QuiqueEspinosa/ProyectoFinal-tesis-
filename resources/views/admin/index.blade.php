@@ -137,6 +137,9 @@
                     <div class="modal-body">
                         @include('admin.invitados')
                         <!-- Tabla de Invitados -->
+                        <div class="d-flex justify-content-end mb-3">
+                            <a href="{{ route('listaInvitados') }}" class="btn btn-info">Ver lista completa</a>
+                        </div>
                         <div class="table-responsive mt-4">
                             <table class="table table-bordered">
                                 <thead>

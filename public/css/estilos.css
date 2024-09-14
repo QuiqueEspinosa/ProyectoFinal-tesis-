@@ -40,9 +40,9 @@
 
 
 #countdown {
-    background-color: #ecd611;
+    background-color: #fdfdfd;
     color: #000;
-    padding: 1rem 2rem; /* Hacer el countdown más grande */
+    padding: 1rem -1rem; /* Hacer el countdown más grande */
     border-radius: 10px;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     transition: transform 0.3s ease;

@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Invitado;
 use App\Models\Mesa;
 use App\Models\Config;
+
+use Barryvdh\DomPDF\Facade\Pdf;
+
 class InvitadoController extends Controller
 {
     // Crear un nuevo invitado
@@ -124,5 +127,37 @@ class InvitadoController extends Controller
             return response()->json(['success' => 'No se Pudo Eliminar'], 404);
         }
     }
+
+
+    public function listaInvitados()
+    {
+        $invitados = Invitado::all(); // O aplica filtros según lo que necesites
+        return view('admin.listaInvitados', compact('invitados'));
+    }
+
+    public function exportPDF(Request $request)
+    {
+        // Obtener el criterio de ordenamiento de la solicitud
+        $sort = $request->query('sort', 'nombre'); // Valor predeterminado 'nombre'
+        $direction = $request->query('direction', 'asc'); // Valor predeterminado 'asc'
+    
+        // Definir el criterio de ordenamiento y la relación
+        $sortColumn = $sort;
+        if ($sort === 'mesa') {
+            $sortColumn = 'numero_mesa';
+        }
+    
+        // Consultar la base de datos con el ordenamiento aplicado
+        $invitados = Invitado::where('confirmacion', '<>', 'rechazado')
+                            ->join('mesas', 'invitados.mesa_id', '=', 'mesas.id')
+                            ->orderBy($sortColumn, $direction)
+                            ->select('invitados.*', 'mesas.numero_mesa') // Seleccionar los campos necesarios
+                            ->get();
+    
+        // Generar el PDF
+        $pdf = Pdf::loadView('pdf.invitados', ['invitados' => $invitados]);
+        return $pdf->download('lista_invitados.pdf');
+    }
+    
 
 }

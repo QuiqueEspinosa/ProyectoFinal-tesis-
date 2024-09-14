@@ -18,7 +18,7 @@
             font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #333
+            background-color: #5e5e5e
         }
 
         h1,

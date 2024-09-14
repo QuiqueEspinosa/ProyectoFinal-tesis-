@@ -25,10 +25,11 @@ Route::post('/mesas/ordenar', [MesaController::class, 'ordenar']);
 Route::post('/update-positions', [ConfigController::class, 'updatePositions']);
 
 
-
-
 Route::post('/admin/add-table', [AdminController::class, 'addTable'])->name('admin.addTable');
 Route::post('/admin/remove-last-table', [AdminController::class, 'removeLastTable'])->name('admin.removeLastTable');
 Route::get('/mesas/{id}/info', [AdminController::class, 'getMesaInfo']);
 
 Route::resource('invitados', InvitadoController::class);
+Route::get('/lista-invitados', [InvitadoController::class, 'listaInvitados'])->name('listaInvitados');
+Route::get('/export-pdf', [InvitadoController::class, 'exportPDF'])->name('invitados.exportPDF');
+
