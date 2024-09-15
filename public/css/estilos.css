@@ -232,7 +232,21 @@
 }
 
 
-/* MODAL ESTILOS */
+#modalSearchInput {
+   
+  
+    padding: 10px;
+    font-size: 14px;
+    width: 200px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+}
+
+.modal-body .btn-info {
+    
+    margin-left: 10px; /* Espacio entre el campo de búsqueda y el botón */
+}
+
 /* Estilos generales para el modal */
 .modal-content {
     border-radius: 10px; /* Esquinas redondeadas */

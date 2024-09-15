@@ -37,35 +37,37 @@
                     style="left: {{ $mesaPrincipal->x }}px; top: {{ $mesaPrincipal->y }}px;"
                     onclick="mostrarInfoMesa(event, {{ $mesaPrincipal->id }})">
                     {{ $mesaPrincipal->titulo }}
-        
+
                     <!-- Contenedor de fotos de invitados para la mesa principal -->
                     <div class="invitados-fotos">
                         @foreach ($mesaPrincipal->invitados as $invitado)
-                            @if($invitado->confirmacion !== 'rechazado') <!-- No muestra invitados rechazados -->
+                            @if ($invitado->confirmacion !== 'rechazado')
+                                <!-- No muestra invitados rechazados -->
                                 <img src="{{ asset('images/' . $invitado->foto) }}"
                                     class="invitado-foto 
-                                        @if($invitado->confirmacion == 'aceptado') confirmado 
+                                        @if ($invitado->confirmacion == 'aceptado') confirmado 
                                         @elseif($invitado->confirmacion == 'en espera') en-espera @endif"
                                     alt="{{ $invitado->nombre }}">
                             @endif
                         @endforeach
                     </div>
                 </div>
-        
+
                 <!-- Otras mesas -->
                 @foreach ($mesas as $mesa)
                     <div class="mesa" data-id="{{ $mesa->id }}"
                         style="left: {{ $mesa->x }}px; top: {{ $mesa->y }}px;"
                         onclick="mostrarInfoMesa(event, {{ $mesa->id }})">
                         {{ $mesa->titulo }}
-        
+
                         <!-- Contenedor de fotos de invitados para cada mesa -->
                         <div class="invitados-fotos">
                             @foreach ($mesa->invitados as $invitado)
-                                @if($invitado->confirmacion !== 'rechazado') <!-- No muestra invitados rechazados -->
+                                @if ($invitado->confirmacion !== 'rechazado')
+                                    <!-- No muestra invitados rechazados -->
                                     <img src="{{ asset('images/' . $invitado->foto) }}"
                                         class="invitado-foto 
-                                            @if($invitado->confirmacion == 'aceptado') confirmado 
+                                            @if ($invitado->confirmacion == 'aceptado') confirmado 
                                             @elseif($invitado->confirmacion == 'en espera') en-espera @endif"
                                         alt="{{ $invitado->nombre }}">
                                 @endif
@@ -75,7 +77,7 @@
                 @endforeach
             </div>
         </div>
-        
+
 
         <!-- Información de la mesa (oculto inicialmente) -->
         <div id="infoMesa" class="info-mesa" style="display:none;">
@@ -129,17 +131,18 @@
                                     {{ $confirmadosCount }}</span>
                             </div>
                             <span class="badge bg-secondary d-flex align-items-center" id="sin-mesa-count">
-                                <i class="fas fa-exclamation-triangle me-1"></i>
-                                Sin Mesa: {{ $sinMesaCount }}
+                                <i class="fas fa-exclamation-triangle me-1"></i> Sin Mesa: {{ $sinMesaCount }}
                             </span>
                         </div>
                     </div>
                     <div class="modal-body">
                         @include('admin.invitados')
-                        <!-- Tabla de Invitados -->
-                        <div class="d-flex justify-content-end mb-3">
+                        <!-- Buscador y botón Ver lista completa -->
+                        <div class="d-flex justify-content-end align-items-center mb-3">
+                            <input type="text" id="modalSearchInput" class="form-control form-control-sm" placeholder="Buscar...">
                             <a href="{{ route('listaInvitados') }}" class="btn btn-info">Ver lista completa</a>
                         </div>
+                        <!-- Tabla de Invitados -->
                         <div class="table-responsive mt-4">
                             <table class="table table-bordered">
                                 <thead>
@@ -197,6 +200,7 @@
                 </div>
             </div>
         </div>
+
 
         <!-- Submodal para edición de invitados -->
         <div class="modal fade" id="submodal" tabindex="-1" aria-labelledby="submodalLabel" aria-hidden="true">
@@ -342,5 +346,32 @@
                 document.getElementById('infoMesa').style.display = 'none';
             }
         </script>
+
+        <script>
+            // Función para filtrar la tabla en el modal
+            document.getElementById('modalSearchInput').addEventListener('keyup', function() {
+                const searchValue = this.value.toLowerCase();
+                const rows = document.querySelectorAll('#listaInvitados tr');
+
+                rows.forEach(row => {
+                    const cells = row.getElementsByTagName('td');
+                    let isVisible = false;
+
+                    for (let i = 0; i < cells.length; i++) {
+                        if (cells[i].textContent.toLowerCase().includes(searchValue)) {
+                            isVisible = true;
+                            break;
+                        }
+                    }
+
+                    if (isVisible) {
+                        row.style.display = '';
+                    } else {
+                        row.style.display = 'none';
+                    }
+                });
+            });
+        </script>
+
 
     @endsection

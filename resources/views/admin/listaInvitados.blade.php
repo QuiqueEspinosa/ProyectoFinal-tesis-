@@ -76,6 +76,21 @@
             border: 1px solid #ccc;
             border-radius: 4px;
         }
+        .search-container {
+            position: relative;
+        }
+
+        .search-container input[type="text"] {
+            padding-left: 30px; /* Espacio para el ícono */
+        }
+
+        .search-container i {
+            position: absolute;
+            left: 10px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #333;
+        }
 
         /* Estilo para los botones de orden */
         .sort-buttons {

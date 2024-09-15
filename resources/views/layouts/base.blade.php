@@ -18,20 +18,20 @@
             font-family: 'Poppins', sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #5e5e5e
+            background-color: #ffffff
         }
 
         h1,
         h2,
         h3 {
             font-family: 'Poppins', sans-serif;
-         
+
             /* Ejemplo de cómo controlar el peso de la fuente */
         }
 
         p {
             font-family: 'Poppins', sans-serif;
-   
+
             /* Peso normal de la fuente */
         }
 
@@ -61,23 +61,31 @@
         .sidebar a,
         .sidebar button {
             display: block;
+            margin-bottom: 1rem;
             color: #fff;
             padding: 15px;
+            width: 100%;
             text-decoration: none;
             border: none;
-            background: none;
+            background-color: #0d00ff;
             text-align: center;
             cursor: pointer;
+            transition: background-color 0.3s ease, transform 0.3s ease;
+            border-radius: 5px;
         }
 
-        .sidebar a:hover,
         .sidebar button:hover {
-            background-color: #575757;
+            background-color: #ffffff;
+            color: #333;
+            border:#333;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
-        .sidebar button {
-            border: 1px solid transparent;
+        .sidebar button:active {
+            transform: translateY(1px);
         }
+
 
         .sidebar .bottom-container {
             position: absolute;
@@ -108,6 +116,7 @@
         </div>
         <button id="addTableBtn">Agregar Mesa</button>
         <button id="removeTableBtn">Eliminar Última Mesa</button>
+        <a href="{{ route('listaInvitados') }}" class="btn btn-info">Ver lista completa</a>
 
         <div class="bottom-container">
             <p id="selectedTable">Selecciona una mesa para ver su número</p>
