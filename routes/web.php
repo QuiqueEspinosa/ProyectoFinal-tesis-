@@ -17,6 +17,10 @@ use App\Http\Controllers\InvitadoController;
 |
 */
 
+Route::get('/index', function () {
+    return view('index');  // Aquí 'index' es el nombre del archivo 'index.blade.php'
+})->name('index');
+
 Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
 Route::post('/update-positions', [ConfigController::class, 'updatePositions'])->name('updatePositions');
 
