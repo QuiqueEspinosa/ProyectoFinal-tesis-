@@ -23,6 +23,7 @@ class InvitadoController extends Controller
             'mesa_id' => 'nullable|exists:mesas,id',
             'menu' => 'required|string',
             'cant_acompanantes' => 'nullable|integer',
+            
         ]);
 
         // Asignar la imagen de perfil según el sexo
@@ -57,6 +58,7 @@ class InvitadoController extends Controller
             'cant_acompanantes' => $validated['cant_acompanantes'],
             'codigo' => strtoupper(bin2hex(random_bytes(3))),
             'confirmacion' => 'en espera',
+            'especial' => 'no',
             'foto' => $foto,
         ]);
 
@@ -80,7 +82,7 @@ class InvitadoController extends Controller
     public function edit($id)
     {
         $invitado = Invitado::findOrFail($id);
-        $mesas = Mesa::where('tipo_mesa', 'Común')->orderBy('posicion')->get();
+        $mesas = Mesa::all(); // O el modelo adecuado para obtener las mesas
         return view('admin.edit_invitado', compact('invitado', 'mesas'));
     }
 
@@ -97,6 +99,7 @@ class InvitadoController extends Controller
             'menu' => 'required|in:Adulto,Infantil,Vegetariano,Dietetico',
             'cant_acompanantes' => 'nullable|integer',
             'confirmacion' => 'required|in:en espera,aceptado,rechazado', // Validar la confirmación
+       
         ]);
 
         // Actualizar los datos del invitado, excepto 'mesa_id' ya que lo manejaremos manualmente

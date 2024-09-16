@@ -40,7 +40,7 @@
         </thead>
         <tbody>
             @foreach ($invitados as $invitado)
-                @if ($invitado->confirmacion !== 'rechazado')
+            @if ($invitado->confirmacion !== 'rechazado' && $invitado->especial !== 'si')
                     <tr>
                         <td>{{ $invitado->nombre }}</td>
                         <td>{{ $invitado->apellido }}</td>

@@ -174,7 +174,7 @@
                 </thead>
                 <tbody id="listaInvitados">
                     @foreach ($invitados as $invitado)
-                        @if ($invitado->confirmacion !== 'rechazado')
+                    @if ($invitado->confirmacion !== 'rechazado' && $invitado->especial !== 'si')
                             <!-- Excluyendo a los rechazados -->
                             <tr>
                                 <td>{{ $invitado->nombre }}</td>

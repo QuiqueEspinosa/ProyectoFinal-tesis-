@@ -31,9 +31,14 @@
 
                         <!-- Clase de Evento -->
                         <div class="form-group">
-                            <label for="clase_evento">Clase de Evento <small>(opcional)</small></label>
-                            <input type="text" class="form-control" id="clase_evento" name="clase_evento"
-                                value="{{ $config->clase_evento ?? '' }}">
+                            <label for="clase_evento">Clase de Evento</label>
+                            <select name="clase_evento" id="clase_evento" class="form-control">
+                                <option value="">Selecciona una clase de evento</option>
+                                <option value="casamiento" {{ old('clase_evento', $config->clase_evento ?? '') == 'casamiento' ? 'selected' : '' }}>Casamiento</option>
+                                <option value="fiesta_15" {{ old('clase_evento', $config->clase_evento ?? '') == 'fiesta_15' ? 'selected' : '' }}>Fiesta de 15</option>
+                                <option value="fiesta_18" {{ old('clase_evento', $config->clase_evento ?? '') == 'fiesta_18' ? 'selected' : '' }}>Fiesta de 18</option>
+                                <!-- Puedes agregar más opciones aquí -->
+                            </select>
                         </div>
 
 

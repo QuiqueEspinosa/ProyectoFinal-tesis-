@@ -35,8 +35,8 @@ class AdminController extends Controller
         }
 
         $mesas = Mesa::where('tipo_mesa', 'Común')->orderBy('posicion')->get();
-
-        return view('admin.index', compact('config', 'mesas', 'mesaPrincipal', 'fechaHoraEvento','invitados','enEsperaCount', 'rechazadosCount', 'confirmadosCount', 'sinMesaCount'));
+        $mesas1= Mesa::all();
+        return view('admin.index', compact('config', 'mesas', 'mesas1','mesaPrincipal', 'fechaHoraEvento','invitados','enEsperaCount', 'rechazadosCount', 'confirmadosCount', 'sinMesaCount'));
     }
 
 

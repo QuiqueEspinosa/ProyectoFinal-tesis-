@@ -22,6 +22,8 @@ class Invitado extends Model
         'codigo',
         'mesa_id', // Relación con la tabla de mesas
         'foto', // Campo para la foto
+        'especial',
+
     ];
 
     // Mutator para establecer un valor predeterminado para el campo código si no se proporciona

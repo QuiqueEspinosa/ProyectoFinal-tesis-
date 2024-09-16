@@ -25,17 +25,13 @@
             </div>
             <div class="mb-3">
                 <label for="mesa_id" class="form-label">Mesa</label>
-                <select class="form-select" id="mesa_id" name="mesa_id"
-                    @if ($mesas->isEmpty()) disabled @endif>
-                    @if ($mesas->isEmpty())
-                        <option value="">Aún no hay mesas creadas</option>
-                    @else
-                        @foreach ($mesas as $mesa)
-                            <option value="{{ $mesa->id }}"
-                                {{ old('mesa_id', $invitado->mesa_id) == $mesa->id ? 'selected' : '' }}>Mesa
-                                {{ $mesa->numero_mesa }}</option>
-                        @endforeach
-                    @endif
+                <select id="mesa_id" name="mesa_id" class="form-select" required>
+                    <option value="">Selecciona una mesa</option>
+                    @foreach ($mesas as $mesa)
+                        <option value="{{ $mesa->id }}" {{ $mesa->id == $invitado->mesa_id ? 'selected' : '' }}>
+                            {{ $mesa->titulo }}
+                        </option>
+                    @endforeach
                 </select>
             </div>
         </div>

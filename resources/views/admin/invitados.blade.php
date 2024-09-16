@@ -23,15 +23,13 @@
                     <option value="bebe">Bebé</option>
                 </select>
             </div>
-            <select class="form-select" id="mesa_id" name="mesa_id" @if($mesas->isEmpty()) disabled @endif>
-                @if ($mesas->isEmpty())
-                    <option value="">Aún no hay mesas creadas</option>
-                @else
-                    @foreach ($mesas as $mesa)
-                        <option value="{{ $mesa->id }}">Mesa {{ $mesa->numero_mesa }}</option>
-                    @endforeach
-                @endif
+            <select id="mesa_id" name="mesa_id" class="form-select" required>
+                <option value="">Selecciona una mesa</option>
+                @foreach ($mesas as $mesa)
+                    <option value="{{ $mesa->id }}">{{ $mesa->titulo }}</option>
+                @endforeach
             </select>
+            
         </div>
         <div class="col-md-6">
             <div class="mb-3">

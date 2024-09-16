@@ -136,7 +136,7 @@
                         </div>
                     </div>
                     <div class="modal-body">
-                        @include('admin.invitados')
+                        @include('admin.invitados', ['mesas' => $mesas1])
                         <!-- Buscador y botón Ver lista completa -->
                         <div class="d-flex justify-content-end align-items-center mb-3">
                             <input type="text" id="modalSearchInput" class="form-control form-control-sm" placeholder="Buscar...">

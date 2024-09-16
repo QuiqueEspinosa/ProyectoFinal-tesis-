@@ -21,6 +21,7 @@ return new class extends Migration
             $table->enum('menu', ['Adulto', 'Infantil', 'Vegetariano', 'Dietetico']);
             $table->integer('cant_acompanantes')->nullable();
             $table->enum('confirmacion', ['en espera', 'aceptado', 'rechazado'])->default('en espera');
+            $table->enum('especial', ['si', 'no'])->default('no');
             $table->string('codigo')->unique();
             $table->foreignId('mesa_id')->nullable()->constrained('mesas')->onDelete('set null'); // Relación con la tabla mesas.
             $table->timestamps();
