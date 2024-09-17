@@ -9,7 +9,7 @@
   <meta content="" name="description">
 
   <!-- Favicons -->
-  {{-- <link href="img/favicon.png" rel="icon"> --}}
+  <link href="img/ico.png" rel="icon"> 
   {{-- <link href="img/apple-touch-icon.png" rel="apple-touch-icon"> --}}
   <link rel="icon" href="data:image/x-icon;,">
 
@@ -56,12 +56,10 @@
           <li><a href="#about">About</a></li>
           <li><a href="#speakers">Speakers</a></li>
           <li><a href="#schedule">Schedule</a></li>
-          <li><a href="#venue">Venue</a></li>
-          <li><a href="#hotels">Hotels</a></li>
-          <li><a href="#gallery">Gallery</a></li>
+          
           <li><a href="#supporters">Sponsors</a></li>
           <li><a href="#contact">Contact</a></li>
-          <li class="buy-tickets"><a href="#buy-tickets">Buy Tickets</a></li>
+          <li class="buy-tickets"><a href="{{ route('login') }}">Login</a></li>
         </ul>
       </nav><!-- #nav-menu-container -->
     </div>
@@ -72,13 +70,14 @@
   ============================-->
   <section id="intro">
     <div class="intro-container wow fadeIn">
-      <h1 class="mb-4 pb-0">The Annual<br><span>Marketing</span> Conference</h1>
-      <p class="mb-4 pb-0">10-12 December, Downtown Conference Center, New York</p>
-      <a href="https://www.youtube.com/watch?v=jDDaplaOz7Q" class="venobox play-btn mb-4" data-vbtype="video"
-        data-autoplay="true"></a>
-      <a href="#about" class="about-btn scrollto">About The Event</a>
+        <h1 class="mb-4 pb-0">Bienvenido a<br><span>Gestión de Eventos</span></h1>
+        <p class="mb-4 pb-0">Simplifica la organización y administración de eventos de manera eficiente y organizada.</p>
+
+        <!-- Botón para más información sobre el evento -->
+        <a href="#about" class="about-btn scrollto">Sobre la Aplicación</a>
     </div>
-  </section>
+</section>
+
 
   <main id="main">
 

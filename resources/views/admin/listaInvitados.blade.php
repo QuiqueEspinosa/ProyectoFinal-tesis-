@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="img/ico.png" rel="icon">
     <title>Lista Completa de Invitados</title>
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -14,24 +15,55 @@
             font-family: 'Poppins', sans-serif;
         }
 
-        .navbar-custom {
-            background-color: #28293e;
-            padding: 0.5rem 1rem;
+        .navbar {
+            width: 100%;
+            background-color: #7c1034;
             color: white;
-            height: auto;
+            padding: 25px 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            position: relative;
+            margin-bottom: 4%;
         }
 
-        .navbar-custom a {
-            color: #00d1b2;
-            font-size: 1.2rem;
-            font-weight: 500;
-            text-decoration: none;
+        /* Los botones se alinean a la derecha con margin-left: auto */
+        /* Estilo del botón en la barra de navegación */
+        .navbar .btn-outline-light {
+            padding: 0.5rem 1rem;
+            background-color: #cfe5ff;
+            border: none;
+            border-radius: 5px;
+            color: #000;
+            transition: background-color 0.3s ease, transform 0.3s ease;
         }
 
-        .container {
-            margin-top: 80px;
-            /* Espacio para evitar superposición con el navbar */
-        }
+        .nav-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-left: auto;
+}
+
+/* Estilo personalizado de los botones */
+.nav-buttons .btn {
+    padding: 0.5rem 1rem;
+    transition: background-color 0.3s ease, color 0.3s ease;
+    background-color: #cfe5ff; /* Color de fondo del botón */
+    border-radius: 5px;
+    color: #000000;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+}
+
+.nav-buttons .btn i {
+    margin-right: 8px; /* Espacio entre el ícono y el texto */
+}
+
+.nav-buttons .btn:hover {
+    background-color: #ffffff;
+    color: #333;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
 
         /* Estilo para la tabla */
         table {
@@ -76,12 +108,14 @@
             border: 1px solid #ccc;
             border-radius: 4px;
         }
+
         .search-container {
             position: relative;
         }
 
         .search-container input[type="text"] {
-            padding-left: 30px; /* Espacio para el ícono */
+            padding-left: 30px;
+            /* Espacio para el ícono */
         }
 
         .search-container i {
@@ -139,15 +173,17 @@
 
 <body>
     <!-- Navbar -->
-    <nav class="navbar-custom">
+    <nav class="navbar">
         <div class="container d-flex justify-content-between align-items-center">
             <span class="navbar-brand">Lista de Invitados</span>
-            <a href="{{ route('admin.index') }}" class="btn btn-outline-light">
-                <i class="fas fa-arrow-left"></i> Regresar a Administración
-            </a>
+            <div class="nav-buttons ms-auto">
+                <a href="{{ route('admin.index') }}" class="btn">
+                    <i class="fas fa-arrow-left"></i> Regresar a Administración
+                </a>
+            </div>
         </div>
     </nav>
-
+    
     <!-- Contenedor principal -->
     <div class="container">
         <!-- Buscador, botones de orden y botón de exportar -->
@@ -174,7 +210,7 @@
                 </thead>
                 <tbody id="listaInvitados">
                     @foreach ($invitados as $invitado)
-                    @if ($invitado->confirmacion !== 'rechazado' && $invitado->especial !== 'si')
+                        @if ($invitado->confirmacion !== 'rechazado' && $invitado->especial !== 'si')
                             <!-- Excluyendo a los rechazados -->
                             <tr>
                                 <td>{{ $invitado->nombre }}</td>
@@ -205,7 +241,8 @@
                 const surname = row.cells[1].textContent.toLowerCase();
                 const mesa = row.cells[2].textContent.toLowerCase();
 
-                if (name.includes(searchValue) || surname.includes(searchValue) || mesa.includes(searchValue)) {
+                if (name.includes(searchValue) || surname.includes(searchValue) || mesa.includes(
+                        searchValue)) {
                     row.style.display = '';
                 } else {
                     row.style.display = 'none';
@@ -250,10 +287,12 @@
             document.querySelectorAll('.sort-buttons button').forEach(button => {
                 button.classList.remove('selected');
             });
-            document.getElementById('sort' + criteria.charAt(0).toUpperCase() + criteria.slice(1)).classList.add('selected');
+            document.getElementById('sort' + criteria.charAt(0).toUpperCase() + criteria.slice(1)).classList.add(
+            'selected');
 
             // Actualizar el enlace de exportación con el criterio de ordenamiento
-            document.getElementById('exportPDF').href = `{{ route('invitados.exportPDF') }}?sort=${criteria}&direction=${direction}`;
+            document.getElementById('exportPDF').href =
+                `{{ route('invitados.exportPDF') }}?sort=${criteria}&direction=${direction}`;
         }
     </script>
 </body>
