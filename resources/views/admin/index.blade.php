@@ -88,8 +88,6 @@
 
 
 
-
-
         <!-- Modal -->
         <div class="modal fade" id="configModal" tabindex="-1" aria-labelledby="configModalLabel" aria-hidden="true">
             <div class="modal-dialog modal-lg">

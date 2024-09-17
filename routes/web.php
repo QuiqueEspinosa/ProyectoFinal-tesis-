@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LoginController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ConfigController;
@@ -17,10 +18,25 @@ use App\Http\Controllers\InvitadoController;
 |
 */
 
+
+
+
+
+Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');
+Route::post('/login', [LoginController::class, 'login']);
+
+Route::get('/register', [LoginController::class, 'showRegisterForm'])->name('register');
+Route::post('/register', [LoginController::class, 'register']);
+
+Route::post('/logout', [LoginController::class, 'logout'])->name('logout');
+
+
 Route::get('/index', function () {
     return view('index');  // Aquí 'index' es el nombre del archivo 'index.blade.php'
 })->name('index');
 
+
+ Route::middleware('auth')->group(function () {
 Route::get('/admin', [AdminController::class, 'index'])->name('admin.index');
 Route::post('/update-positions', [ConfigController::class, 'updatePositions'])->name('updatePositions');
 
@@ -37,3 +53,4 @@ Route::resource('invitados', InvitadoController::class);
 Route::get('/lista-invitados', [InvitadoController::class, 'listaInvitados'])->name('listaInvitados');
 Route::get('/export-pdf', [InvitadoController::class, 'exportPDF'])->name('invitados.exportPDF');
 
+ });

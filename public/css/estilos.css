@@ -2,7 +2,7 @@
 /* Estilos para la barra de navegación */
 .navbar {
     width: 100%;
-    background-color: #000000b5;
+    background-color: #7c1034;
     color: white;
     display: flex;
     justify-content: space-between;
@@ -23,10 +23,28 @@
     padding: 0.5rem 1rem;
     transition: background-color 0.3s ease, color 0.3s ease;
 }
-
+.nav-buttons button {
+    display: block;
+   
+    color: #000000;
+    padding: 10px;
+    width: 100%;
+    text-decoration: none;
+    border: none;
+    background-color: #cfe5ff;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+    border-radius: 5px;
+}
 .nav-buttons .btn:hover {
-    background-color: #fff;
-    color: #007bff;
+    
+        background-color: #ffffff;
+        color: #333;
+        border:#333;
+        transform: translateY(-1px);
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); 
+  
 }
 
 /* El contenedor del countdown se centra con flex-grow y text-align */
@@ -40,7 +58,7 @@
 
 
 #countdown {
-    background-color: #fdfdfd;
+    background-color:  #cfe5ff;
     color: #000;
     padding: 1rem -1rem; /* Hacer el countdown más grande */
     border-radius: 10px;
@@ -85,7 +103,7 @@
     position: absolute; /* Asegúrate de que el contenedor esté posicionado correctamente */
     width: 8vw; /* Ajuste según el viewport */
     height: 8vw; /* Mantén la proporción */
-    background-color: #ea00ff;
+    background-color: #f4acb7;
     color: white;
     text-align: center;
     line-height: 8vw; /* Centra el texto verticalmente */
@@ -96,7 +114,7 @@
 
 .mesa-principal {
     position: relative;
-    background-color: #11e8ec;
+    background-color: #bbd0ff;
     width: 8vw;
     height: 8vw;
     font-size: 15px; /* Ajusta según el tamaño necesario */
@@ -233,8 +251,6 @@
 
 
 #modalSearchInput {
-   
-  
     padding: 10px;
     font-size: 14px;
     width: 200px;
@@ -255,7 +271,7 @@
 
 /* Estilo del encabezado del modal */
 .modal-header {
-    background-color: #007bff; /* Color de fondo */
+    background-color: #7c1034; /* Color de fondo */
     color: white; /* Color del texto */
     border-bottom: 2px solid #0056b3; /* Línea inferior */
     padding: 1rem; /* Espaciado */
