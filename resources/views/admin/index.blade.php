@@ -1,3 +1,15 @@
+{{-- 
+INSERT INTO invitados (nombre, apellido, edad, sexo, menu, cant_acompanantes, confirmacion, especial, codigo, mesa_id)
+VALUES
+('Juan', 'Pérez', 'adulto', 'M', 'Adulto', 2, 'aceptado', 'no', 'INV001', 3),
+('María', 'Gómez', 'adulto', 'F', 'Vegetariano', 0, 'en espera', 'no', 'INV002', 3),
+('Carlos', 'Rodríguez', 'niño', 'M', 'Infantil', 1, 'aceptado', 'no', 'INV003', 3),
+('Laura', 'Fernández', 'adulto', 'F', 'Dietetico', 1, 'rechazado', 'no', 'INV004', 3),
+('Sofía', 'Martínez', 'bebe', 'F', 'Infantil', 0, 'aceptado', 'no', 'INV005', 3),
+('Luis', 'González', 'adulto', 'M', 'Adulto', 3, 'en espera', 'no', 'INV006', 3),
+('Ana', 'López', 'adulto', 'F', 'Vegetariano', 1, 'aceptado', 'no', 'INV007', 3),
+('Diego', 'Hernández', 'adulto', 'M', 'Adulto', 0, 'rechazado', 'no', 'INV008', 3); --}}
+
 @extends('layouts.base')
 
 @section('title', 'Organización de Mesas en el Evento')

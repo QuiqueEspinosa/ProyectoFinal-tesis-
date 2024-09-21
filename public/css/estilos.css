@@ -215,6 +215,27 @@
 .invitados-fotos img:nth-child(11) { transform: rotate(300deg) translateX(208%); }
 .invitados-fotos img:nth-child(12) { transform: rotate(330deg) translateX(208%); } */
 
+.copiar-icono {
+    cursor: pointer;
+    margin-left: 5px;
+    color: #007bff; /* Color del icono */
+    transition: color 0.2s;
+}
+
+.copiar-icono:hover {
+    color: #0056b3; /* Color al pasar el mouse */
+}
+
+.copiado {
+    color: green; /* Color para indicar que se copió */
+    animation: pulse 1s;
+}
+
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.1); }
+    100% { transform: scale(1); }
+}
 
 
 

@@ -6,7 +6,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ConfigController;
 use App\Http\Controllers\MesaController;
 use App\Http\Controllers\InvitadoController;
-
+use App\Http\Controllers\ConfirmacionController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -20,6 +20,10 @@ use App\Http\Controllers\InvitadoController;
 
 
 
+
+Route::get('/confirmacion', [ConfirmacionController::class, 'index'])->name('confirmacion.index');
+Route::post('/confirmacion', [ConfirmacionController::class, 'confirmar'])->name('confirmacion.confirmar');
+Route::post('/confirmacion/guardar', [ConfirmacionController::class, 'guardar'])->name('confirmacion.guardar');
 
 
 Route::get('/login', [LoginController::class, 'showLoginForm'])->name('login');

@@ -53,13 +53,12 @@
       <nav id="nav-menu-container">
         <ul class="nav-menu">
           <li class="menu-active"><a href="#intro">Home</a></li>
-          <li><a href="#about">About</a></li>
-          <li><a href="#speakers">Speakers</a></li>
-          <li><a href="#schedule">Schedule</a></li>
-          
-          <li><a href="#supporters">Sponsors</a></li>
-          <li><a href="#contact">Contact</a></li>
-          <li class="buy-tickets"><a href="{{ route('login') }}">Login</a></li>
+        
+          <li><a href="#faq">Preguntas Frecuentes</a></li>
+          <li><a href="#buy-tickets">Planes</a></li>
+          <li><a href="#contact">Contactanos</a></li>
+          <li class="buy-tickets"><a href="{{ route('confirmacion.index') }}">Confirmar Invitacion</a></li>
+          <li class="buy-tickets"><a href="{{ route('login') }}">Iniciar Sesion</a></li>
         </ul>
       </nav><!-- #nav-menu-container -->
     </div>
@@ -87,134 +86,76 @@
     <section id="about">
       <div class="container">
         <div class="row">
-          <div class="col-lg-6">
-            <h2>About The Event</h2>
-            <p>Sed nam ut dolor qui repellendus iusto odit. Possimus inventore eveniet accusamus error amet eius aut
-              accusantium et. Non odit consequatur repudiandae sequi ea odio molestiae. Enim possimus sunt inventore in
-              est ut optio sequi unde.</p>
-          </div>
-          <div class="col-lg-3">
-            <h3>Where</h3>
-            <p>Downtown Conference Center, New York</p>
-          </div>
-          <div class="col-lg-3">
-            <h3>When</h3>
-            <p>Monday to Wednesday<br>10-12 December</p>
+          <div class="col-lg-12">
+            <h2>Sobre Quivent</h2>
+            <p>
+              Quivent es una solución completa para la organización y gestión de eventos, diseñada para hacer que la planificación sea más eficiente y visual. 
+              Con nuestra plataforma, los usuarios pueden organizar gráficamente la distribución de mesas e invitados, logrando una experiencia de planificación dinámica 
+              y personalizada. Además, permite la administración de listas de invitados, su ordenamiento según preferencias y la descarga en formato PDF para un fácil 
+              seguimiento y control de los asistentes.
+            </p>
+            <p>
+              Nuestra plataforma está pensada para adaptarse a cualquier tipo de evento, desde fiestas de 15 y 18 años, hasta bodas y celebraciones más grandes. 
+              Con Quivent, la organización de un evento no solo es más intuitiva, sino que también se convierte en una experiencia organizada y sin complicaciones, 
+              brindando a los anfitriones una herramienta eficaz para gestionar todos los aspectos del evento.
+            </p>
           </div>
         </div>
       </div>
     </section>
+    
+    
 
     <!--==========================
       Speakers Section
     ============================-->
-    <section id="speakers" class="wow fadeInUp">
+    <section id="features" class="wow fadeInUp">
       <div class="container">
-        <div class="section-header">
-          <h2>Event Speakers</h2>
-          <p>Here are some of our speakers</p>
-        </div>
-
-        <div class="row">
-          <div class="col-lg-4 col-md-6">
-            <div class="speaker">
-              <img src="img/speakers/1.jpg" alt="Speaker 1" class="img-fluid">
-              <div class="details">
-                <h3><a href="speaker-details.html">Brenden Legros</a></h3>
-                <p>Quas alias incidunt</p>
-                <div class="social">
-                  <a href=""><i class="fa fa-twitter"></i></a>
-                  <a href=""><i class="fa fa-facebook"></i></a>
-                  <a href=""><i class="fa fa-google-plus"></i></a>
-                  <a href=""><i class="fa fa-linkedin"></i></a>
-                </div>
-              </div>
-            </div>
+          <div class="section-header">
+              <h2>Gestión de Invitados</h2>
+              <p>Añade, organiza y administra a tus invitados fácilmente</p>
           </div>
-          <div class="col-lg-4 col-md-6">
-            <div class="speaker">
-              <img src="img/speakers/2.jpg" alt="Speaker 2" class="img-fluid">
-              <div class="details">
-                <h3><a href="speaker-details.html">Hubert Hirthe</a></h3>
-                <p>Consequuntur odio aut</p>
-                <div class="social">
-                  <a href=""><i class="fa fa-twitter"></i></a>
-                  <a href=""><i class="fa fa-facebook"></i></a>
-                  <a href=""><i class="fa fa-google-plus"></i></a>
-                  <a href=""><i class="fa fa-linkedin"></i></a>
-                </div>
+  
+          <div class="row">
+              <div class="col-lg-4 col-md-6">
+                  <div class="feature-box">
+                      <img src="images/gestion.jpeg" alt="Agregar Invitados" class="img-fluid feature-image">
+                      <div class="details">
+                          <h3><a href="#">Agregar Invitados</a></h3>
+                          <p>Puedes añadir invitados con facilidad, proporcionando su información básica, asignarles mesas y más.</p>
+                      </div>
+                  </div>
               </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6">
-            <div class="speaker">
-              <img src="img/speakers/3.jpg" alt="Speaker 3" class="img-fluid">
-              <div class="details">
-                <h3><a href="speaker-details.html">Cole Emmerich</a></h3>
-                <p>Fugiat laborum et</p>
-                <div class="social">
-                  <a href=""><i class="fa fa-twitter"></i></a>
-                  <a href=""><i class="fa fa-facebook"></i></a>
-                  <a href=""><i class="fa fa-google-plus"></i></a>
-                  <a href=""><i class="fa fa-linkedin"></i></a>
-                </div>
+  
+              <div class="col-lg-4 col-md-6">
+                  <div class="feature-box">
+                      <img src="images/vista1.jpeg" alt="Organizar Invitados" class="img-fluid feature-image">
+                      <div class="details">
+                          <h3><a href="#">Organizar Invitados</a></h3>
+                          <p>Organiza a tus invitados en mesas de manera visual. Arrastra y suelta los nombres para ubicarlos donde prefieras.</p>
+                      </div>
+                  </div>
               </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6">
-            <div class="speaker">
-              <img src="img/speakers/4.jpg" alt="Speaker 4" class="img-fluid">
-              <div class="details">
-                <h3><a href="speaker-details.html">Jack Christiansen</a></h3>
-                <p>Debitis iure vero</p>
-                <div class="social">
-                  <a href=""><i class="fa fa-twitter"></i></a>
-                  <a href=""><i class="fa fa-facebook"></i></a>
-                  <a href=""><i class="fa fa-google-plus"></i></a>
-                  <a href=""><i class="fa fa-linkedin"></i></a>
-                </div>
+  
+              <div class="col-lg-4 col-md-6">
+                  <div class="feature-box">
+                      <img src="images/export.jpeg" alt="Administrar Invitados" class="img-fluid feature-image">
+                      <div class="details">
+                          <h3><a href="#">Administrar Detalles</a></h3>
+                          <p>Cambia información, reasigna mesas, o ajusta detalles de cada invitado en cualquier momento durante la planificación.</p>
+                          <p><strong>Exporta la lista de invitados en formato PDF o Excel para una fácil impresión y distribución.</strong></p>
+                      </div>
+                  </div>
               </div>
-            </div>
           </div>
-          <div class="col-lg-4 col-md-6">
-            <div class="speaker">
-              <img src="img/speakers/5.jpg" alt="Speaker 5" class="img-fluid">
-              <div class="details">
-                <h3><a href="speaker-details.html">Alejandrin Littel</a></h3>
-                <p>Qui molestiae natus</p>
-                <div class="social">
-                  <a href=""><i class="fa fa-twitter"></i></a>
-                  <a href=""><i class="fa fa-facebook"></i></a>
-                  <a href=""><i class="fa fa-google-plus"></i></a>
-                  <a href=""><i class="fa fa-linkedin"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="col-lg-4 col-md-6">
-            <div class="speaker">
-              <img src="img/speakers/6.jpg" alt="Speaker 6" class="img-fluid">
-              <div class="details">
-                <h3><a href="speaker-details.html">Willow Trantow</a></h3>
-                <p>Non autem dicta</p>
-                <div class="social">
-                  <a href=""><i class="fa fa-twitter"></i></a>
-                  <a href=""><i class="fa fa-facebook"></i></a>
-                  <a href=""><i class="fa fa-google-plus"></i></a>
-                  <a href=""><i class="fa fa-linkedin"></i></a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
       </div>
-
-    </section>
+  </section>
+    
 
     <!--==========================
       Schedule Section
     ============================-->
-    <section id="schedule" class="section-with-bg">
+    {{-- <section id="schedule" class="section-with-bg">
       <div class="container wow fadeInUp">
         <div class="section-header">
           <h2>Event Schedule</h2>
@@ -466,12 +407,12 @@
 
       </div>
 
-    </section>
+    </section> --}}
 
     <!--==========================
       Venue Section
     ============================-->
-    <section id="venue" class="wow fadeInUp">
+    {{-- <section id="venue" class="wow fadeInUp">
 
       <div class="container-fluid">
 
@@ -567,7 +508,7 @@
         </div>
       </div>
 
-    </section>
+    </section> --}}
 
     <!--==========================
       Hotels Section
@@ -576,8 +517,8 @@
 
       <div class="container">
         <div class="section-header">
-          <h2>Hotels</h2>
-          <p>Her are some nearby hotels</p>
+          <h2>Salones</h2>
+          <p>Salones que confiaron en nuestro software</p>
         </div>
 
         <div class="row">
@@ -585,9 +526,9 @@
           <div class="col-lg-4 col-md-6">
             <div class="hotel">
               <div class="hotel-img">
-                <img src="img/hotels/1.jpg" alt="Hotel 1" class="img-fluid">
+                <img src="images/El-almendro.jpg" alt="Hotel 1" class="img-fluid">
               </div>
-              <h3><a href="#">Hotel 1</a></h3>
+              <h3><a href="#">El Almendro</a></h3>
               <div class="stars">
                 <i class="fa fa-star"></i>
                 <i class="fa fa-star"></i>
@@ -595,16 +536,16 @@
                 <i class="fa fa-star"></i>
                 <i class="fa fa-star"></i>
               </div>
-              <p>0.4 Mile from the Venue</p>
+              
             </div>
           </div>
 
           <div class="col-lg-4 col-md-6">
             <div class="hotel">
               <div class="hotel-img">
-                <img src="img/hotels/2.jpg" alt="Hotel 2" class="img-fluid">
+                <img src="images/prado.png" alt="Hotel 2" class="img-fluid">
               </div>
-              <h3><a href="#">Hotel 2</a></h3>
+              <h3><a href="#">El Prado</a></h3>
               <div class="stars">
                 <i class="fa fa-star"></i>
                 <i class="fa fa-star"></i>
@@ -612,23 +553,23 @@
                 <i class="fa fa-star"></i>
                 <i class="fa fa-star-half-full"></i>
               </div>
-              <p>0.5 Mile from the Venue</p>
+            
             </div>
           </div>
 
           <div class="col-lg-4 col-md-6">
             <div class="hotel">
               <div class="hotel-img">
-                <img src="img/hotels/3.jpg" alt="Hotel 3" class="img-fluid">
+                <img src="images/milenio.png" alt="Hotel 3" class="img-fluid">
               </div>
-              <h3><a href="#">Hotel 3</a></h3>
+              <h3><a href="#">Milenio</a></h3>
               <div class="stars">
                 <i class="fa fa-star"></i>
                 <i class="fa fa-star"></i>
                 <i class="fa fa-star"></i>
                 <i class="fa fa-star"></i>
               </div>
-              <p>0.6 Mile from the Venue</p>
+            
             </div>
           </div>
 
@@ -640,7 +581,7 @@
     <!--==========================
       Gallery Section
     ============================-->
-    <section id="gallery" class="wow fadeInUp">
+    {{-- <section id="gallery" class="wow fadeInUp">
 
       <div class="container">
         <div class="section-header">
@@ -726,89 +667,102 @@
 
       </div>
 
-    </section>
+    </section> --}}
 
-    <!--==========================
+   <!--==========================
       F.A.Q Section
-    ============================-->
-    <section id="faq" class="wow fadeInUp">
+============================-->
+<section id="faq" class="wow fadeInUp">
+  <div class="container">
+    <div class="section-header">
+      <h2>Preguntas Frecuentes</h2>
+    </div>
 
-      <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-9">
+        <ul id="faq-list">
+          <li>
+            <a data-toggle="collapse" class="collapsed" href="#faq1">¿Cómo puedo agregar invitados a un evento? <i class="fa fa-minus-circle"></i></a>
+            <div id="faq1" class="collapse" data-parent="#faq-list">
+              <p>
+                Puedes agregar invitados a través de la sección "Gestión de Invitados" en el menú principal. Solo necesitas proporcionar la información básica y asignarles una mesa.
+              </p>
+            </div>
+          </li>
 
-        <div class="section-header">
-          <h2>F.A.Q </h2>
-        </div>
+          <li>
+            <a data-toggle="collapse" href="#faq2" class="collapsed">¿Puedo modificar la información de un invitado después de haberlo agregado? <i class="fa fa-minus-circle"></i></a>
+            <div id="faq2" class="collapse" data-parent="#faq-list">
+              <p>
+                Sí, puedes editar la información de cualquier invitado en cualquier momento. Solo selecciona al invitado que deseas modificar y actualiza los campos necesarios.
+              </p>
+            </div>
+          </li>
 
-        <div class="row justify-content-center">
-          <div class="col-lg-9">
-              <ul id="faq-list">
+          <li>
+            <a data-toggle="collapse" href="#faq3" class="collapsed">¿Cómo funciona la asignación de mesas para mis invitados? <i class="fa fa-minus-circle"></i></a>
+            <div id="faq3" class="collapse" data-parent="#faq-list">
+              <p>
+                Puedes arrastrar y soltar a tus invitados en las mesas disponibles en la vista de organización. También puedes ajustar la configuración de las mesas según tus preferencias.
+              </p>
+            </div>
+          </li>
 
-                <li>
-                  <a data-toggle="collapse" class="collapsed" href="#faq1">Non consectetur a erat nam at lectus urna duis? <i class="fa fa-minus-circle"></i></a>
-                  <div id="faq1" class="collapse" data-parent="#faq-list">
-                    <p>
-                      Feugiat pretium nibh ipsum consequat. Tempus iaculis urna id volutpat lacus laoreet non curabitur gravida. Venenatis lectus magna fringilla urna porttitor rhoncus dolor purus non.
-                    </p>
-                  </div>
-                </li>
-      
-                <li>
-                  <a data-toggle="collapse" href="#faq2" class="collapsed">Feugiat scelerisque varius morbi enim nunc faucibus a pellentesque? <i class="fa fa-minus-circle"></i></a>
-                  <div id="faq2" class="collapse" data-parent="#faq-list">
-                    <p>
-                      Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
-                    </p>
-                  </div>
-                </li>
-      
-                <li>
-                  <a data-toggle="collapse" href="#faq3" class="collapsed">Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi? <i class="fa fa-minus-circle"></i></a>
-                  <div id="faq3" class="collapse" data-parent="#faq-list">
-                    <p>
-                      Eleifend mi in nulla posuere sollicitudin aliquam ultrices sagittis orci. Faucibus pulvinar elementum integer enim. Sem nulla pharetra diam sit amet nisl suscipit. Rutrum tellus pellentesque eu tincidunt. Lectus urna duis convallis convallis tellus. Urna molestie at elementum eu facilisis sed odio morbi quis
-                    </p>
-                  </div>
-                </li>
-      
-                <li>
-                  <a data-toggle="collapse" href="#faq4" class="collapsed">Ac odio tempor orci dapibus. Aliquam eleifend mi in nulla? <i class="fa fa-minus-circle"></i></a>
-                  <div id="faq4" class="collapse" data-parent="#faq-list">
-                    <p>
-                      Dolor sit amet consectetur adipiscing elit pellentesque habitant morbi. Id interdum velit laoreet id donec ultrices. Fringilla phasellus faucibus scelerisque eleifend donec pretium. Est pellentesque elit ullamcorper dignissim. Mauris ultrices eros in cursus turpis massa tincidunt dui.
-                    </p>
-                  </div>
-                </li>
-      
-                <li>
-                  <a data-toggle="collapse" href="#faq5" class="collapsed">Tempus quam pellentesque nec nam aliquam sem et tortor consequat? <i class="fa fa-minus-circle"></i></a>
-                  <div id="faq5" class="collapse" data-parent="#faq-list">
-                    <p>
-                      Molestie a iaculis at erat pellentesque adipiscing commodo. Dignissim suspendisse in est ante in. Nunc vel risus commodo viverra maecenas accumsan. Sit amet nisl suscipit adipiscing bibendum est. Purus gravida quis blandit turpis cursus in
-                    </p>
-                  </div>
-                </li>
-      
-                <li>
-                  <a data-toggle="collapse" href="#faq6" class="collapsed">Tortor vitae purus faucibus ornare. Varius vel pharetra vel turpis nunc eget lorem dolor? <i class="fa fa-minus-circle"></i></a>
-                  <div id="faq6" class="collapse" data-parent="#faq-list">
-                    <p>
-                      Laoreet sit amet cursus sit amet dictum sit amet justo. Mauris vitae ultricies leo integer malesuada nunc vel. Tincidunt eget nullam non nisi est sit amet. Turpis nunc eget lorem dolor sed. Ut venenatis tellus in metus vulputate eu scelerisque. Pellentesque diam volutpat commodo sed egestas egestas fringilla phasellus faucibus. Nibh tellus molestie nunc non blandit massa enim nec.
-                    </p>
-                  </div>
-                </li>
-      
-              </ul>
-          </div>
-        </div>
+          <li>
+            <a data-toggle="collapse" href="#faq4" class="collapsed">¿Puedo ver un listado completo de mis invitados? <i class="fa fa-minus-circle"></i></a>
+            <div id="faq4" class="collapse" data-parent="#faq-list">
+              <p>
+                Sí, puedes descargar un listado completo de todos los invitados en formato PDF desde la sección de "Gestión de Invitados".
+              </p>
+            </div>
+          </li>
 
+          <li>
+            <a data-toggle="collapse" href="#faq5" class="collapsed">¿Qué debo hacer si una mesa está llena? <i class="fa fa-minus-circle"></i></a>
+            <div id="faq5" class="collapse" data-parent="#faq-list">
+              <p>
+                Si una mesa ha alcanzado su capacidad máxima, no podrás agregar más invitados. Te recomendamos revisar la distribución de tus invitados y ajustar según sea necesario.
+              </p>
+            </div>
+          </li>
+
+          <li>
+            <a data-toggle="collapse" href="#faq6" class="collapsed">¿Cómo puedo personalizar los menús para mis invitados? <i class="fa fa-minus-circle"></i></a>
+            <div id="faq6" class="collapse" data-parent="#faq-list">
+              <p>
+                Al agregar un invitado, puedes seleccionar el menú que se adapte a sus preferencias, ya sea vegetariano, infantil, o adulto. Esto se puede modificar más tarde si es necesario.
+              </p>
+            </div>
+          </li>
+
+          <li>
+            <a data-toggle="collapse" href="#faq7" class="collapsed">¿El sistema permite múltiples eventos? <i class="fa fa-minus-circle"></i></a>
+            <div id="faq7" class="collapse" data-parent="#faq-list">
+              <p>
+                Sí, puedes gestionar varios eventos al mismo tiempo. Solo necesitas crear un nuevo evento y seguir el mismo proceso de gestión de invitados y mesas.
+              </p>
+            </div>
+          </li>
+
+          <li>
+            <a data-toggle="collapse" href="#faq8" class="collapsed">¿Cómo puedo obtener soporte si tengo problemas? <i class="fa fa-minus-circle"></i></a>
+            <div id="faq8" class="collapse" data-parent="#faq-list">
+              <p>
+                Si necesitas ayuda, puedes contactarnos a través de la sección de soporte en el menú principal, donde podrás enviar tus consultas y recibir asistencia.
+              </p>
+            </div>
+          </li>
+        </ul>
       </div>
+    </div>
+  </div>
+</section>
 
-    </section>
 
     <!--==========================
       Subscribe Section
     ============================-->
-    <section id="subscribe">
+    {{-- <section id="subscribe">
       <div class="container wow fadeInUp">
         <div class="section-header">
           <h2>Newsletter</h2>
@@ -827,89 +781,61 @@
         </form>
 
       </div>
-    </section>
+    </section> --}}
 
     <!--==========================
       Buy Ticket Section
     ============================-->
     <section id="buy-tickets" class="section-with-bg wow fadeInUp">
       <div class="container">
-
+    
         <div class="section-header">
           <h2>Buy Tickets</h2>
           <p>Velit consequatur consequatur inventore iste fugit unde omnis eum aut.</p>
         </div>
-
+    
         <div class="row">
-          <div class="col-lg-4">
+          <div class="col-lg-6">
             <div class="card mb-5 mb-lg-0">
               <div class="card-body">
-                <h5 class="card-title text-muted text-uppercase text-center">Standard Access</h5>
-                <h6 class="card-price text-center">$150</h6>
+                <h5 class="card-title text-muted text-uppercase text-center">Basic Plan</h5>
+                <h6 class="card-price text-center">$3</h6>
                 <hr>
                 <ul class="fa-ul">
-                  <li><span class="fa-li"><i class="fa fa-check"></i></span>Regular Seating</li>
-                  <li><span class="fa-li"><i class="fa fa-check"></i></span>Coffee Break</li>
-                  <li><span class="fa-li"><i class="fa fa-check"></i></span>Custom Badge</li>
-                  <li class="text-muted"><span class="fa-li"><i class="fa fa-times"></i></span>Community Access</li>
-                  <li class="text-muted"><span class="fa-li"><i class="fa fa-times"></i></span>Workshop Access</li>
-                  <li class="text-muted"><span class="fa-li"><i class="fa fa-times"></i></span>After Party</li>
+                  <li><span class="fa-li"><i class="fa fa-check"></i></span>Acceso total hasta el día del evento</li>
+                  <li><span class="fa-li"><i class="fa fa-check"></i></span>Agregar elementos según necesidades</li>
+                  <li class="text-muted"><span class="fa-li"><i class="fa fa-times"></i></span>Soporte para múltiples usuarios</li>
                 </ul>
                 <hr>
                 <div class="text-center">
-                  <button type="button" class="btn" data-toggle="modal" data-target="#buy-ticket-modal" data-ticket-type="standard-access">Buy Now</button>
+                  <button type="button" class="btn" data-toggle="modal" data-target="#buy-ticket-modal" data-ticket-type="basic-plan">Buy Now</button>
                 </div>
               </div>
             </div>
           </div>
-          <div class="col-lg-4">
+    
+          <div class="col-lg-6">
             <div class="card mb-5 mb-lg-0">
               <div class="card-body">
-                <h5 class="card-title text-muted text-uppercase text-center">Pro Access</h5>
-                <h6 class="card-price text-center">$250</h6>
+                <h5 class="card-title text-muted text-uppercase text-center">Special Plan</h5>
+                <h6 class="card-price text-center">$10 (3 meses)</h6>
                 <hr>
                 <ul class="fa-ul">
-                  <li><span class="fa-li"><i class="fa fa-check"></i></span>Regular Seating</li>
-                  <li><span class="fa-li"><i class="fa fa-check"></i></span>Coffee Break</li>
-                  <li><span class="fa-li"><i class="fa fa-check"></i></span>Custom Badge</li>
-                  <li><span class="fa-li"><i class="fa fa-check"></i></span>Community Access</li>
-                  <li class="text-muted"><span class="fa-li"><i class="fa fa-times"></i></span>Workshop Access</li>
-                  <li class="text-muted"><span class="fa-li"><i class="fa fa-times"></i></span>After Party</li>
+                  <li><span class="fa-li"><i class="fa fa-check"></i></span>Acceso total hasta el día del evento</li>
+                  <li><span class="fa-li"><i class="fa fa-check"></i></span>Hasta 100 usuarios en la cuenta</li>
+                  <li><span class="fa-li"><i class="fa fa-check"></i></span>Agregar elementos según necesidades</li>
                 </ul>
                 <hr>
                 <div class="text-center">
-                  <button type="button" class="btn" data-toggle="modal" data-target="#buy-ticket-modal" data-ticket-type="pro-access">Buy Now</button>
+                  <button type="button" class="btn" data-toggle="modal" data-target="#buy-ticket-modal" data-ticket-type="special-plan">Buy Now</button>
                 </div>
-              </div>
-            </div>
-          </div>
-          <!-- Pro Tier -->
-          <div class="col-lg-4">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title text-muted text-uppercase text-center">Premium Access</h5>
-                <h6 class="card-price text-center">$350</h6>
-                <hr>
-                <ul class="fa-ul">
-                  <li><span class="fa-li"><i class="fa fa-check"></i></span>Regular Seating</li>
-                  <li><span class="fa-li"><i class="fa fa-check"></i></span>Coffee Break</li>
-                  <li><span class="fa-li"><i class="fa fa-check"></i></span>Custom Badge</li>
-                  <li><span class="fa-li"><i class="fa fa-check"></i></span>Community Access</li>
-                  <li><span class="fa-li"><i class="fa fa-check"></i></span>Workshop Access</li>
-                  <li><span class="fa-li"><i class="fa fa-check"></i></span>After Party</li>
-                </ul>
-                <hr>
-                <div class="text-center">
-                  <button type="button" class="btn" data-toggle="modal" data-target="#buy-ticket-modal" data-ticket-type="premium-access">Buy Now</button>
-                </div>
-
               </div>
             </div>
           </div>
         </div>
-
+    
       </div>
-
+    
       <!-- Modal Order Form -->
       <div id="buy-ticket-modal" class="modal fade">
         <div class="modal-dialog" role="document">
@@ -929,11 +855,10 @@
                   <input type="text" class="form-control" name="your-email" placeholder="Your Email">
                 </div>
                 <div class="form-group">
-                  <select id="ticket-type" name="ticket-type" class="form-control" >
+                  <select id="ticket-type" name="ticket-type" class="form-control">
                     <option value="">-- Select Your Ticket Type --</option>
-                    <option value="standard-access">Standard Access</option>
-                    <option value="pro-access">Pro Access</option>
-                    <option value="premium-access">Premium Access</option>
+                    <option value="basic-plan">Basic Plan</option>
+                    <option value="special-plan">Special Plan</option>
                   </select>
                 </div>
                 <div class="text-center">
@@ -944,8 +869,10 @@
           </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
       </div><!-- /.modal -->
-
+    
     </section>
+    
+    
 
     <!--==========================
       Contact Section
@@ -955,8 +882,7 @@
       <div class="container">
 
         <div class="section-header">
-          <h2>Contact Us</h2>
-          <p>Nihil officia ut sint molestiae tenetur.</p>
+          <h2>Contactanos</h2>
         </div>
 
         <div class="row contact-info">
@@ -964,16 +890,16 @@
           <div class="col-md-4">
             <div class="contact-address">
               <i class="ion-ios-location-outline"></i>
-              <h3>Address</h3>
-              <address>A108 Adam Street, NY 535022, USA</address>
+              <h3>Direccion</h3>
+              <address>Bernasconi 297(o) bºhualilan,San Juan,Argentina</address>
             </div>
           </div>
 
           <div class="col-md-4">
             <div class="contact-phone">
               <i class="ion-ios-telephone-outline"></i>
-              <h3>Phone Number</h3>
-              <p><a href="tel:+155895548855">+1 5589 55488 55</a></p>
+              <h3>Celular</h3>
+              <p><a href="tel:+155895548855">+54 9 2645278373</a></p>
             </div>
           </div>
 
@@ -981,32 +907,32 @@
             <div class="contact-email">
               <i class="ion-ios-email-outline"></i>
               <h3>Email</h3>
-              <p><a href="mailto:info@example.com">info@example.com</a></p>
+              <p><a href="mailto:info@example.com">EnriqueEspinosa2025@test.com</a></p>
             </div>
           </div>
 
         </div>
 
         <div class="form">
-          <div id="sendmessage">Your message has been sent. Thank you!</div>
+          <div id="sendmessage">Tu mensaje ha sido enviado. ¡Gracias!</div>
           <div id="errormessage"></div>
           <form action="" method="post" role="form" class="contactForm">
             <div class="form-row">
               <div class="form-group col-md-6">
-                <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
+                <input type="text" name="name" class="form-control" id="name" placeholder="Nombre" data-rule="minlen:4" data-msg="Please enter at least 4 chars" />
                 <div class="validation"></div>
               </div>
               <div class="form-group col-md-6">
-                <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" data-rule="email" data-msg="Please enter a valid email" />
+                <input type="email" class="form-control" name="email" id="email" placeholder="Email" data-rule="email" data-msg="Please enter a valid email" />
                 <div class="validation"></div>
               </div>
             </div>
             <div class="form-group">
-              <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
+              <input type="text" class="form-control" name="subject" id="subject" placeholder="Asunto" data-rule="minlen:4" data-msg="Please enter at least 8 chars of subject" />
               <div class="validation"></div>
             </div>
             <div class="form-group">
-              <textarea class="form-control" name="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
+              <textarea class="form-control" name="message" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Mensaje"></textarea>
               <div class="validation"></div>
             </div>
             <div class="text-center"><button type="submit">Send Message</button></div>
@@ -1026,44 +952,53 @@
     <div class="footer-top">
       <div class="container">
         <div class="row">
-
+  
           <div class="col-lg-3 col-md-6 footer-info">
-            <img src="img/logo.png" alt="TheEvenet">
-            <p>In alias aperiam. Placeat tempore facere. Officiis voluptate ipsam vel eveniet est dolor et totam porro. Perspiciatis ad omnis fugit molestiae recusandae possimus. Aut consectetur id quis. In inventore consequatur ad voluptate cupiditate debitis accusamus repellat cumque.</p>
-          </div>
-
+            <img src="img/logo.png" alt="TheEvent">
+           </div>
+  
           <div class="col-lg-3 col-md-6 footer-links">
-            <h4>Useful Links</h4>
+            <h4>Enlaces Útiles</h4>
             <ul>
-              <li><i class="fa fa-angle-right"></i> <a href="#">Home</a></li>
-              <li><i class="fa fa-angle-right"></i> <a href="#">About us</a></li>
-              <li><i class="fa fa-angle-right"></i> <a href="#">Services</a></li>
-              <li><i class="fa fa-angle-right"></i> <a href="#">Terms of service</a></li>
-              <li><i class="fa fa-angle-right"></i> <a href="#">Privacy policy</a></li>
+              <li><i class="fa fa-angle-right"></i> <a href="#">Inicio</a></li>
+              <li><i class="fa fa-angle-right"></i> <a href="#">Sobre Nosotros</a></li>
+              <li><i class="fa fa-angle-right"></i> <a href="#">Servicios</a></li>
+              <li><i class="fa fa-angle-right"></i> <a href="#">Términos de Servicio</a></li>
+              <li><i class="fa fa-angle-right"></i> <a href="#">Política de Privacidad</a></li>
             </ul>
           </div>
-
+  
           <div class="col-lg-3 col-md-6 footer-links">
-            <h4>Useful Links</h4>
+            <h4>Enlaces Adicionales</h4>
             <ul>
-              <li><i class="fa fa-angle-right"></i> <a href="#">Home</a></li>
-              <li><i class="fa fa-angle-right"></i> <a href="#">About us</a></li>
-              <li><i class="fa fa-angle-right"></i> <a href="#">Services</a></li>
-              <li><i class="fa fa-angle-right"></i> <a href="#">Terms of service</a></li>
-              <li><i class="fa fa-angle-right"></i> <a href="#">Privacy policy</a></li>
+              <li><i class="fa fa-angle-right"></i> <a href="#">Blog</a></li>
+              <li><i class="fa fa-angle-right"></i> <a href="#">Contacto</a></li>
+              <li><i class="fa fa-angle-right"></i> <a href="#">FAQ</a></li>
+              <li><i class="fa fa-angle-right"></i> <a href="#">Soporte</a></li>
+              <li><i class="fa fa-angle-right"></i> <a href="#">Carreras</a></li>
             </ul>
           </div>
-
+  
           <div class="col-lg-3 col-md-6 footer-contact">
-            <h4>Contact Us</h4>
-            <p>
-              A108 Adam Street <br>
-              New York, NY 535022<br>
-              United States <br>
-              <strong>Phone:</strong> +1 5589 55488 55<br>
-              <strong>Email:</strong> info@example.com<br>
-            </p>
-
+            <h4>Contáctanos</h4>
+            <div class="contact-address">
+              <i class="ion-ios-location-outline"></i>
+              <h3>Dirección</h3>
+              <address>Bernasconi 297(o) bº Hualilán, San Juan, Argentina</address>
+            </div>
+  
+            <div class="contact-phone">
+              <i class="ion-ios-telephone-outline"></i>
+              <h3>Celular</h3>
+              <p><a href="tel:+5452645278373">+54 9 2645278373</a></p>
+            </div>
+  
+            <div class="contact-email">
+              <i class="ion-ios-email-outline"></i>
+              <h3>Email</h3>
+              <p><a href="mailto:EnriqueEspinosa2025@test.com">EnriqueEspinosa2025@test.com</a></p>
+            </div>
+  
             <div class="social-links">
               <a href="#" class="twitter"><i class="fa fa-twitter"></i></a>
               <a href="#" class="facebook"><i class="fa fa-facebook"></i></a>
@@ -1071,29 +1006,22 @@
               <a href="#" class="google-plus"><i class="fa fa-google-plus"></i></a>
               <a href="#" class="linkedin"><i class="fa fa-linkedin"></i></a>
             </div>
-
           </div>
-
+  
         </div>
       </div>
     </div>
-
+  
     <div class="container">
       <div class="copyright">
-        &copy; Copyright <strong>TheEvent</strong>. All Rights Reserved
+        &copy; Copyright <strong>Quivent</strong>. Todos los derechos reservados
       </div>
       <div class="credits">
-        <!--
-          All the links in the footer should remain intact.
-          You can delete the links only if you purchased the pro version.
-          Licensing information: https://bootstrapmade.com/license/
-          Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/buy/?theme=TheEvent
-        -->
-        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+        Diseñado por <a href="https://bootstrapmade.com/">Enrique Espinosa</a>
       </div>
     </div>
   </footer><!-- #footer -->
-
+  
   <a href="#" class="back-to-top"><i class="fa fa-angle-up"></i></a>
 
   <!-- JavaScript Libraries -->

@@ -8,7 +8,16 @@
 /*--------------------------------------------------------------
 # General
 --------------------------------------------------------------*/
+.feature-image {
+  width: 100%; /* Ocupa todo el ancho del contenedor */
+  height: auto; /* Mantiene la proporción de la imagen */
+  max-height: 200px; /* Establece una altura máxima */
+  object-fit: cover; /* Asegura que la imagen cubra el espacio sin deformarse */
+}
 
+.feature-box {
+  margin-bottom: 2rem; /* Espacio entre columnas */
+}
 body {
   background: #fff;
   color: #2f3138;
@@ -656,45 +665,41 @@ body.mobile-nav-active #mobile-nav-toggle {
 /*--------------------------------------------------------------
 # About Section
 --------------------------------------------------------------*/
-
 #about {
-  background: url("../img/about-bg.jpg");
-  background-size: cover;
-  overflow: hidden;
-  position: relative;
+  background: url("../img/about-bg.jpg") no-repeat center center/cover;
   color: #fff;
-  padding: 60px 0 40px 0;
+  padding: 60px 0;
+  position: relative;
+  overflow: hidden;
 }
 
 #about:before {
   content: "";
-  background: rgba(13, 20, 41, 0.8);
+  background: rgba(13, 20, 41, 0.57);
   position: absolute;
-  bottom: 0;
   top: 0;
-  left: 0;
   right: 0;
+  bottom: 0;
+  left: 0;
 }
 
 #about h2 {
   font-size: 36px;
   font-weight: bold;
-  margin-bottom: 10px;
-  color: #fff;
-}
-
-#about h3 {
-  font-size: 18px;
-  font-weight: bold;
-  text-transform: uppercase;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
   color: #fff;
 }
 
 #about p {
-  font-size: 14px;
+  font-size: 20px;
+  line-height: 1.8;
   margin-bottom: 20px;
   color: #fff;
+}
+
+#about .container {
+  position: relative;
+  z-index: 1;
 }
 
 /*--------------------------------------------------------------
@@ -980,9 +985,13 @@ body.mobile-nav-active #mobile-nav-toggle {
 #hotels .hotel-img {
   overflow: hidden;
   margin-bottom: 15px;
+  position: relative; /* Permite que la imagen se posicione de forma absoluta dentro del contenedor */
 }
 
 #hotels .hotel-img img {
+  width: 100%; /* Ocupa todo el ancho del contenedor */
+  height: 200px; /* Establece una altura fija para todas las imágenes */
+  object-fit: cover; /* Escala la imagen para cubrir todo el espacio disponible, recortando si es necesario */
   transition: 0.3s ease-in-out;
 }
 
@@ -1017,6 +1026,7 @@ body.mobile-nav-active #mobile-nav-toggle {
   font-style: italic;
   font-size: 15px;
 }
+
 
 /*--------------------------------------------------------------
 # Gallery Section
@@ -1213,7 +1223,6 @@ body.mobile-nav-active #mobile-nav-toggle {
 /*--------------------------------------------------------------
 # Buy Tickets Section
 --------------------------------------------------------------*/
-
 #buy-tickets {
   padding: 60px 0;
 }
@@ -1221,7 +1230,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 #buy-tickets .card {
   border: none;
   border-radius: 5px;
-  transition: all  0.3s ease-in-out;
+  transition: all 0.3s ease-in-out;
   box-shadow: 0 10px 25px 0 rgba(6, 12, 34, 0.1);
 }
 
@@ -1421,7 +1430,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 }
 
 #footer .footer-top .footer-info img {
-  height: 40px;
+  height: 130px;
   margin-bottom: 10px;
 }
 

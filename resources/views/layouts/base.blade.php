@@ -209,7 +209,7 @@
 <body>
     <div class="sidebar">
         <div class="logo">
-            <img src="{{ asset('images/logo.png') }}" alt="Logo">
+            <img src="{{ asset('img/logo.png') }}" alt="Logo">
         </div>
         <button id="addTableBtn">Agregar Mesa</button>
         <button id="removeTableBtn">Eliminar Última Mesa</button>
